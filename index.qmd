@@ -1,23 +1,17 @@
 ---
-title: La Palma Earthquakes
+title: Meta-Analytic Evaluation of Volleyball Metrics
 author:
-  - name: Steve Purves
-    orcid: 0000-0002-0760-5497
-    corresponding: true
-    email: steve@curvenote.com
-    roles:
-      - Investigation
-      - Project administration
-      - Software
-      - Visualization
-    affiliations:
-      - Curvenote
-  - name: Rowan Cockett
-    orcid: 0000-0002-7859-8394
+  - name: Daniel Hu
+    orcid: XXXX-XXXX-XXXX-XXXX
     corresponding: false
-    roles: []
+    email: daniel.hu@uwaterloo.ca
     affiliations:
-      - Curvenote
+      - University of Waterloo
+  - name: David Awosoga
+    orcid: 0000-0002-2741-5770
+    corresponding: true
+    affiliations:
+      - University of Waterloo
 keywords:
   - La Palma
   - Earthquakes
