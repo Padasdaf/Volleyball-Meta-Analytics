@@ -10,6 +10,7 @@ author:
   - name: David Awosoga
     orcid: 0000-0002-2741-5770
     corresponding: true
+    email: david.awosoga@uwaterloo.ca
     affiliations:
       - University of Waterloo
 keywords:
