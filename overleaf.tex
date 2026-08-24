@@ -33,8 +33,10 @@
 \begin{document}
 \maketitle
 
+
 \section{Abstract}
 Meta-analytics \citep{franks_meta-analytics_2016} can be used to evaluate the quality of metrics that assess player ability in sports. This helps stakeholders make effective comparisons between players without being overwhelmed by metrics that lack practical significance, technical depth, or appropriate data considerations. Meta-analytics are based on three criteria: stability, discrimination, and independence. Stability quantifies how consistent a player’s value for metric m remains across seasons after accounting for random noise, capturing its sensitivity to change. Discrimination measures how well a metric differentiates between players based on the proportion of total between-player variance in metric m that reflects true differences in player ability rather than sampling variability. Independence measures how much unique information a metric m adds beyond the set of other metrics M. In this project, we apply meta-analytics to evaluate the quality and underlying properties of a set of both basic and advanced volleyball metrics \citep{powers_estimating_2025, bagley_bump_2017, fellingham_evaluating_2022} using open-source collegiate and professional women’s volleyball data (Aucoin et al., 2024; \cite{awosoga_rvolleydata_2026}; Stevens, 2024). From these analyses, we comprehensively identify and provide commentary on the metrics that provide the most unique and reliable information for the wider volleyball community, including stakeholders such as coaches, athletes, and fans. By accounting for the heterogeneous distributions of league-specific data, we are able to compare and contrast metric interpretation and utility across leagues. Such analysis has not been performed in the volleyball analytics literature and consequently fills a major gap, particularly with the proliferation of advanced metrics that have been introduced in the past few years. Our findings provide a greater understanding of the properties of current statistics and identify areas where improvements in independence, stability, and discrimination can be made when developing new metrics.
+
 
 \section{Introduction}
 
@@ -53,8 +55,22 @@ Our objective is therefore not to identify a single universally ``best'' volleyb
 
 \section{Background}
 
+\subsection{Volleyball and Performance Analysis}
+
+Indoor volleyball is a rally-based team sport in which two teams of six players attempt to ground the ball on the opponent's court while preventing the opponent from doing the same. A team's possession typically progresses through a sequence of contacts such as reception or defense, setting, and attack, while serving and blocking provide additional opportunities to directly influence the outcome of a rally. Players also occupy specialized roles, including setters, outside and opposite hitters, middle blockers, and liberos, which differ substantially in both their responsibilities and their opportunities to perform particular actions. Consequently, individual volleyball performance is inherently multidimensional and role-dependent: a statistic that is informative for one position may have limited relevance for another.
+
+This structure has motivated analyses extending beyond conventional box-score summaries. Studies have examined which skills differentiate winning and losing performances in closely contested sets \citep{drikos_contribution_2020}, how situational constraints influence setter decision-making and offensive distribution \citep{rocha_setting_2021, nascimento_decision-making_2023}, and how spatial and physical information can be used to characterize interactions among attackers, blockers, and court defenders \citep{cantu-gonzalez_attack-block-court_2022}. These approaches illustrate the variety of dimensions through which volleyball performance can be studied and provide additional context for why evaluating players often requires multiple statistics rather than a single summary measure.
+
 \subsection{Related Work}
-- talk about how meta analytics have been performed in other sports
+
+The meta-analytic framework was developed to address a related problem arising from the growing number of player-performance metrics in sports: determining which statistics provide reliable and distinct information \citep{franks_meta-analytics_2016}. Rather than proposing another performance metric, the framework evaluates statistical properties of existing metrics. Its original application considered more than 70 metrics from the National Basketball Association (NBA) and 40 metrics from the National Hockey League (NHL), demonstrating that metrics with substantially different constructions and distributions can be assessed within a common framework.
+
+The NBA application revealed considerable variation in the statistical properties of familiar player statistics. Metrics such as rebounds, blocks, and assists were found to be highly discriminative and stable, reflecting substantial differences across player types, whereas raw three-point percentage exhibited relatively low discrimination and stability \citep{franks_meta-analytics_2016}. The analysis also highlighted differences between rate-based and playing-time-dependent measures and identified substantial redundancy among several commonly used measures of overall player performance. In particular, the first principal component of five omnibus NBA metrics explained approximately 73\% of their variation, suggesting that much of the information represented by these apparently distinct measures lay along a common underlying dimension \citep{franks_meta-analytics_2016}.
+
+The NHL application demonstrated that the same framework could characterize metrics in a different sporting environment. Statistics such as hits, blocks, and shots were relatively discriminative and stable because they strongly distinguished different player types, while plus-minus exhibited comparatively low discrimination \citep{franks_meta-analytics_2016}. The framework also enabled comparisons between closely related families of hockey statistics, including Corsi- and Fenwick-based measures, and examined the amount of overlapping information contained across metrics.
+
+These applications demonstrate that the usefulness of a sports metric cannot be inferred solely from its familiarity, complexity, or interpretation. Metrics that appear different may contain highly redundant information, while observed differences between players may in some cases be strongly influenced by sampling variability. Although volleyball research has produced an increasingly diverse set of traditional and advanced performance measures, comparable meta-analytic evaluation has not been conducted in the sport. The present study extends this line of work by systematically examining the statistical properties of individual-player volleyball metrics.
+
 
 \section{Data}
 
