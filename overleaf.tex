@@ -1,0 +1,102 @@
+\documentclass[10 pt, fullpage]{article}
+
+\usepackage{geometry}
+ \geometry{
+ letterpaper,
+ total={7in,9.5in},
+ left=0.75in,
+ top=0.75in,
+ }
+
+ \usepackage{xcolor}
+
+\usepackage[round]{natbib}
+\renewcommand{\bibname}{References}
+\renewcommand{\bibsection}{\subsubsection*{\bibname}}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amssymb, amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, citecolor=blue, urlcolor=blue]{hyperref}
+\usepackage{soul}
+
+\bibliographystyle{apalike}
+
+\title{Meta-Analytic Evaluation of Volleyball Metrics}
+
+% \author{
+%   Daniel Hu \\
+%   David Awosoga \\ \\
+%   University of Waterloo \\}
+
+\begin{document}
+\maketitle
+
+\section{Abstract}
+Meta-analytics \citep{franks_meta-analytics_2016} can be used to evaluate the quality of metrics that assess player ability in sports. This helps stakeholders make effective comparisons between players without being overwhelmed by metrics that lack practical significance, technical depth, or appropriate data considerations. Meta-analytics are based on three criteria: stability, discrimination, and independence. Stability quantifies how consistent a player’s value for metric m remains across seasons after accounting for random noise, capturing its sensitivity to change. Discrimination measures how well a metric differentiates between players based on the proportion of total between-player variance in metric m that reflects true differences in player ability rather than sampling variability. Independence measures how much unique information a metric m adds beyond the set of other metrics M. In this project, we apply meta-analytics to evaluate the quality and underlying properties of a set of both basic and advanced volleyball metrics \citep{powers_estimating_2025, bagley_bump_2017, fellingham_evaluating_2022} using open-source collegiate and professional women’s volleyball data (Aucoin et al., 2024; \cite{awosoga_rvolleydata_2026}; Stevens, 2024). From these analyses, we comprehensively identify and provide commentary on the metrics that provide the most unique and reliable information for the wider volleyball community, including stakeholders such as coaches, athletes, and fans. By accounting for the heterogeneous distributions of league-specific data, we are able to compare and contrast metric interpretation and utility across leagues. Such analysis has not been performed in the volleyball analytics literature and consequently fills a major gap, particularly with the proliferation of advanced metrics that have been introduced in the past few years. Our findings provide a greater understanding of the properties of current statistics and identify areas where improvements in independence, stability, and discrimination can be made when developing new metrics.
+
+\section{Introduction}
+
+
+
+
+\section{Background}
+
+\subsection{Related Work}
+- talk about how meta analytics have been performed in other sports
+
+\section{Data}
+
+talk about the different granularities of data
+
+\begin{itemize}
+    \item boxscore data
+    \item play by play
+    \item tracking data
+\end{itemize}
+
+then talk about the data sources that we're using here
+
+\section{Methodology}
+
+- formally define meta analytics
+
+\section{Results}
+
+\subsection{Basic Metrics}
+
+\subsection{Advanced Metrics}
+
+For each metric:
+- talk about how it was derived, what it is purposed to do, and how it's implemented
+
+\subsection{Discussion}
+
+\section{Conclusion}
+
+\subsection{Future Work}
+
+\subsection*{Acknowledgment}
+
+This work was made possible through collaboration within the \href{https://www.uwaggs.ca}{\ul{University of Waterloo Analytics Group for Games and Sports (UWAGGS)}}. We are grateful for the insightful comments and feedback of Dr. Samuel WK Wong, Associate Professor in the Department of Statistics and Actuarial Science at the University of Waterloo.
+
+\subsection*{Funding}
+
+None declared.
+
+\subsection*{Conflict of Interest}
+
+The authors state no conflict of interest.
+
+\subsection*{Data}
+The data utilized in this paper come from publicly available Major League Volleyball data, sourced using the \texttt{rvolleydata} R package \citep{awosoga_rvolleydata_2026}
+
+\subsection*{Supplementary Material}
+Complete code necessary to reproduce the data cleaning, modeling, analysis, and visualizations found in this paper can be found on GitHub at \url{https://padasdaf.github.io/Volleyball-Meta-Analytics/}
+
+\clearpage
+\thispagestyle{empty}
+
+\bibliography{references}
+\end{document}
