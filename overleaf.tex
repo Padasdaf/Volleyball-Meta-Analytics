@@ -35,13 +35,12 @@
 
 
 \section{Abstract}
-Meta-analytics \citep{franks_meta-analytics_2016} can be used to evaluate the quality of metrics that assess player ability in sports. This helps stakeholders make effective comparisons between players without being overwhelmed by metrics that lack practical significance, technical depth, or appropriate data considerations. Meta-analytics are based on three criteria: stability, discrimination, and independence. Stability quantifies how consistent a player’s value for metric m remains across seasons after accounting for random noise, capturing its sensitivity to change. Discrimination measures how well a metric differentiates between players based on the proportion of total between-player variance in metric m that reflects true differences in player ability rather than sampling variability. Independence measures how much unique information a metric m adds beyond the set of other metrics M. In this project, we apply meta-analytics to evaluate the quality and underlying properties of a set of both basic and advanced volleyball metrics \citep{powers_estimating_2025, bagley_bump_2017, fellingham_evaluating_2022} using open-source collegiate and professional women’s volleyball data (Aucoin et al., 2024; \cite{awosoga_rvolleydata_2026}; Stevens, 2024). From these analyses, we comprehensively identify and provide commentary on the metrics that provide the most unique and reliable information for the wider volleyball community, including stakeholders such as coaches, athletes, and fans. By accounting for the heterogeneous distributions of league-specific data, we are able to compare and contrast metric interpretation and utility across leagues. Such analysis has not been performed in the volleyball analytics literature and consequently fills a major gap, particularly with the proliferation of advanced metrics that have been introduced in the past few years. Our findings provide a greater understanding of the properties of current statistics and identify areas where improvements in independence, stability, and discrimination can be made when developing new metrics.
+Meta-analytics \citep{franks_meta-analytics_2016} can be used to evaluate the quality of metrics that assess player ability in sports. This helps stakeholders make effective comparisons between players without being overwhelmed by metrics that lack practical significance, technical depth, or appropriate data considerations. Meta-analytics are based on three criteria: \textit{stability}, \textit{discrimination}, and \textit{independence}. Stability quantifies how consistent a player’s value for metric $m$ remains across seasons after accounting for random noise, capturing its sensitivity to change. Discrimination measures how well a metric differentiates between players based on the proportion of total between-player variance in metric m that reflects true differences in player ability rather than sampling variability. Independence measures how much unique information a metric $m$ adds beyond the set of other metrics $\mathcal{M}$. In this work, we apply meta-analytics to evaluate the quality and underlying properties of a set of both basic \citep{major_league_volleyball_statistics_2024} and advanced volleyball metrics \citep{powers_estimating_2025, bagley_bump_2017, fellingham_evaluating_2022} using open-source collegiate and professional women’s volleyball data \citep{aucoin_usportspy_2026, aucoin_usportsr_2026, awosoga_pyvolleydata_2026, awosoga_rvolleydata_2026, stevens_extract_2026}. From these analyses, we comprehensively identify and provide commentary on the metrics that provide the most unique and reliable information for the wider volleyball community, including stakeholders such as coaches, athletes, and fans. By accounting for the heterogeneous distributions of league-specific data, we are able to compare and contrast metric interpretation and utility across leagues. Such analysis has not been performed in the volleyball analytics literature and consequently fills a major gap, particularly with the proliferation of advanced metrics that have been introduced in the past few years. Our findings provide a greater understanding of the properties of current statistics and identify areas where improvements in independence, stability, and discrimination can be made when developing new metrics.
 
 
 \section{Introduction}
 
 Quantitative analysis has become increasingly important in evaluating player performance and informing decision-making in sport. As richer data sources and more sophisticated statistical methods have become available, the number and complexity of player-performance metrics have grown accordingly. Although this expansion provides analysts, coaches, and other stakeholders with more information, it also creates a fundamental problem: the existence of many metrics does not imply that each provides reliable or distinct information about player ability. Two metrics may largely measure the same underlying characteristic, while another may vary substantially because of sampling noise rather than meaningful differences between players. To address this broader problem in sports analytics, a meta-analytic framework was introduced for evaluating metrics according to three statistical properties: discrimination, stability, and independence \citep{franks_meta-analytics_2016}.
-
 Volleyball provides a particularly useful setting in which to apply this framework. Traditional volleyball analysis relies heavily on box-score statistics and derived efficiencies describing skills such as attacking, serving, reception, blocking, and defense. Previous work has demonstrated meaningful relationships between these performance indicators and competitive outcomes. Studies have examined the contributions of spike, serve, and block performance to team rankings \citep{marcelino_weight_2008}, as well as which volleyball skills and contextual factors best predict winning and losing at the elite level \citep{pena_which_2013}. Such work establishes the practical importance of commonly recorded volleyball statistics, but it does not directly address how reliably those statistics distinguish among individual players or how much information different statistics share.
 
 More recent volleyball analytics research has moved beyond conventional box-score summaries toward increasingly sophisticated measures of individual contribution. Markov-chain and Bayesian logistic-regression approaches have been used to quantify the importance of individual volleyball skills \citep{miskin_skill_2010}. Objective ratings have also been proposed for six fundamental volleyball skills---serve, reception, set, attack, block, and dig---with the goal of producing consistent evaluations of players and teams \citep{bagley_bump_2017}. Bayesian hierarchical models have been used to estimate position- and player-specific contributions through points scored above average, explicitly accounting for the difficulty of separating an individual's performance from that of their teammates \citep{fellingham_evaluating_2022}. More recently, point progression has been modeled using more than five million recorded contacts from NCAA Division I women's volleyball, attributing changes in point-winning probability to individual player actions and adjusting for factors such as opponent strength \citep{powers_estimating_2025}. Together, these developments illustrate the growing breadth of metrics available for describing volleyball performance.
@@ -58,23 +57,25 @@ Our objective is therefore not to identify a single universally ``best'' volleyb
 \subsection{Volleyball and Performance Analysis}
 
 Indoor volleyball is a rally-based team sport in which two teams of six players attempt to ground the ball on the opponent's court while preventing the opponent from doing the same. When a team controls the ball during a rally, play typically progresses through a sequence of contacts such as reception or defense, setting, and attack, while serving and blocking provide additional opportunities to directly influence the outcome of a rally. Players also occupy specialized roles, including setters, outside and opposite hitters, middle blockers, and liberos, which differ substantially in both their responsibilities and their opportunities to perform particular actions. Consequently, individual volleyball performance is inherently multidimensional and role-dependent: a statistic that is informative for one position may have limited relevance for another.
-
 This structure has motivated analyses extending beyond conventional box-score summaries. Studies have examined which skills differentiate winning and losing performances in closely contested sets \citep{drikos_contribution_2020}, how situational constraints influence setter decision-making and offensive distribution \citep{rocha_setting_2021, nascimento_decision-making_2023}, and how spatial and physical information can be used to characterize interactions among attackers, blockers, and court defenders \citep{cantu-gonzalez_attack-block-court_2022}. These approaches illustrate the variety of dimensions through which volleyball performance can be studied and provide additional context for why evaluating players often requires multiple statistics rather than a single summary measure.
 
 \subsection{Related Work}
 
+% TODO: talk about meta analysis 
+
 The meta-analytic framework was originally demonstrated using more than 70 player-performance metrics from the National Basketball Association (NBA) and 40 metrics from the National Hockey League (NHL) \citep{franks_meta-analytics_2016}. Rather than proposing additional performance metrics, the study evaluated the statistical properties of existing measures, demonstrating that metrics with substantially different constructions and distributions could be assessed within a common framework.
 
 The NBA application revealed considerable variation in the statistical properties of familiar player statistics. Metrics such as rebounds, blocks, and assists were found to be highly discriminative and stable, reflecting substantial differences across player types, whereas raw three-point percentage exhibited relatively low discrimination and stability \citep{franks_meta-analytics_2016}. The analysis also highlighted differences between rate-based and playing-time-dependent measures and identified substantial redundancy among several commonly used measures of overall player performance. In particular, the first principal component of five omnibus NBA metrics explained approximately 73\% of their variation, suggesting that much of the information represented by these apparently distinct measures lay along a common underlying dimension \citep{franks_meta-analytics_2016}.
-
 The NHL application demonstrated that the same framework could characterize metrics in a different sporting environment. Statistics such as hits, blocks, and shots were relatively discriminative and stable because they strongly distinguished different player types, while plus-minus exhibited comparatively low discrimination \citep{franks_meta-analytics_2016}. The framework also enabled comparisons between closely related families of hockey statistics, including Corsi- and Fenwick-based measures, and examined the amount of overlapping information contained across metrics.
+
+%TODO: comment on meta analytics in other sports: eg https://tonyelhabr.rbind.io/posts/soccer-meta-analytics/
 
 Despite the application of meta-analytics to basketball and hockey, an analogous systematic evaluation has not been conducted for volleyball. The present study extends this framework to individual-player volleyball metrics.
 
 
 \section{Data}
 
-\subsection{Data Granularity}
+\subsection{Data Exposition}
 
 Volleyball data are available at several levels of granularity, with progressively richer data supporting increasingly contextual measures of player performance. We distinguish among three primary levels used or considered in this study: box-score, play-by-play, and tracking data.
 
@@ -82,7 +83,9 @@ Box-score data provide aggregated summaries of player performance within sets an
 
 Play-by-play data retain the sequence and context of individual actions within rallies. In addition to identifying the action and its outcome, these records include information such as the set and point in which the action occurred, the team and player involved, the current score, the point winner, and rally length. Event logs provide complementary match-state information, including substitutions, serving teams, rally timing, and the players occupying each on-court position. Relative to box scores, these data make it possible to construct metrics that depend on the circumstances or ordering of actions rather than only their aggregate outcomes.
 
-Tracking data provide the highest level of granularity considered in this study. For the purposes of this analysis, tracking data refer to a richer DataVolley-style MLV scout dataset containing detailed information for individual volleyball contacts. For the 2024 and 2025 seasons, these records include persistent player identifiers, ordered touch sequences, six-player lineups, phases of play, detailed skill evaluations, score state, and event-level court coordinates.
+Tracking data provide the highest level of granularity considered in this study. For the purposes of this analysis, tracking data refer to a richer DataVolley-style MLV scout dataset containing detailed information for individual volleyball contacts.
+% TODO: Document the provenance and availability of the MLV tracking dataset once its final access/reproducibility details are established.
+For the 2024 and 2025 seasons, these records include persistent player identifiers, ordered touch sequences, six-player lineups, phases of play, detailed skill evaluations, score state, and event-level court coordinates.
 % TODO: Update tracking-data coverage to include the 2026 MLV season once the 2026 tracking-data pipeline and advanced metrics have been implemented and validated.
 This information enables the construction of advanced measures that depend on setter-to-attacker relationships, attack context, lineup combinations, touch sequences, point importance, or spatial information. These variables are not all available through the standard documented play-by-play interface and therefore provide information beyond the publicly exposed data products.
 
@@ -90,33 +93,199 @@ The distinction among these levels of granularity is important because the data 
 
 \subsection{Data Sources}
 
-The study draws on women's volleyball data from both professional and collegiate competitions. Professional data are obtained from League One Volleyball Pro (LOVB), Athletes Unlimited Pro Volleyball (AU), and Major League Volleyball (MLV). These data are accessed through the \texttt{pyvolleydata} Python package and the \texttt{rvolleydata} R package \citep{awosoga_rvolleydata_2026}, which provide programmatic access to the professional-volleyball data ecosystem.
+The study draws on women's volleyball data from both professional and collegiate competitions. Professional data are obtained from League One Volleyball Pro (LOVB), Athletes Unlimited Pro Volleyball (AU), and Major League Volleyball (MLV). These data are accessed through the \texttt{pyvolleydata} Python \citep{awosoga_pyvolleydata_2026} package and the \texttt{rvolleydata} R package \citep{awosoga_rvolleydata_2026}, which provide programmatic access to the professional-volleyball data ecosystem.
 % TODO: Add the pyvolleydata citation here once the package has been added to references.bib.
 Depending on the league and season, the available data products include schedules, player information, player and team box scores, play-by-play records, and event logs.
 
-Collegiate data are obtained from competitions in both Canada and the United States. U SPORTS data are accessed using the \texttt{usportspy} Python package and the \texttt{usportsR} R package.
+Collegiate data are obtained from competitions in both Canada and the United States. U SPORTS data are accessed using the \texttt{usportspy} \citep{aucoin_usportspy_2026} Python package and the \texttt{usportsR} \citep{aucoin_usportsr_2026} R package.
 % TODO: Add citations for usportspy and usportsR here once the packages have been added to references.bib.
 NCAA Division I volleyball data are collected using the \texttt{ncaavolleyballr} R package \citep{stevens_extract_2026}. Incorporating both collegiate and professional competitions allows the statistical properties of player metrics to be examined across multiple competitive environments rather than within a single league.
+% TODO: Verify and report the exact leagues and seasons included in the final analysis once all data pipelines have been implemented.
 
 For metrics requiring information beyond the standard documented data products, we additionally use the MLV tracking data described above. The current tracking dataset covers the 2024 and 2025 MLV seasons.
 % TODO: Update this paragraph to include the 2026 MLV tracking data once it has been implemented and incorporated into the advanced-metric analysis.
-Standard MLV data provide broader seasonal coverage, including 2026, but the corresponding publicly exposed play-by-play data do not contain all of the fields required for these tracking-dependent measures. Analyses involving such metrics are therefore restricted to the league-seasons for which the necessary data are available.
+Standard MLV data provide broader seasonal coverage, including 2026, but the corresponding publicly exposed play-by-play data do not contain all of the fields required for these tracking-dependent measures. 
+Analyses involving such metrics are therefore restricted to the league-seasons for which the necessary data are available.
 
 The empirical distribution of a particular metric may differ across competitive environments because of differences in player populations, schedules, playing styles, and league structure. Rather than treating observations from all competitions as belonging to a single homogeneous population, we preserve these league-specific distributions in the analysis. The procedures used to estimate and compare the meta-analytic properties of metrics across these heterogeneous data sources are described in the Methodology section.
 
 
 \section{Methodology}
 
-- formally define meta analytics
+\subsection{Meta-Analytic Framework}
+
+We adapt the meta-analytic framework of \citep{franks_meta-analytics_2016} to individual-player volleyball metrics. Let $X$ denote the three-dimensional array of observed metric values indexed by season $s$, player $p$, and metric $m$, with $X_{spm}$ representing the value of metric $m$ for player $p$ in season $s$. Because observed metric values are calculated from a finite number of volleyball actions or matches, $X_{spm}$ contains both systematic variation and sampling variability.
+
+Following \citep{franks_meta-analytics_2016}, we use conditional expectation and variance notation to distinguish variation across the dimensions of $X$. In particular,
+\[
+E_{spm}[X]
+=
+E[X \mid S=s,P=p,M=m]
+\]
+and
+\[
+V_{spm}[X]
+=
+\operatorname{Var}[X \mid S=s,P=p,M=m],
+\]
+with analogous notation such as $V_{sm}[X]$, $V_{pm}[X]$, and $V_m[X]$ used when variation is taken across players, seasons, or both. The quantity $V_{spm}[X]$ represents sampling variability for a particular player-season metric, whereas the remaining variance terms describe variation across observed players and seasons.
+
+The framework evaluates each metric according to three complementary properties: discrimination, stability, and independence. These quantify, respectively, the extent to which a metric distinguishes players beyond sampling noise, persists within players across seasons, and contributes information not already contained in other metrics \citep{franks_meta-analytics_2016}.
+
+\subsection{Discrimination}
+
+For a metric to reliably differentiate players within a season, a substantial proportion of its observed between-player variation should reflect systematic differences between players rather than sampling variability. By the law of total variance,
+\[
+V_{sm}[X]
+=
+E_{sm}\left[V_{spm}[X]\right]
++
+V_{sm}\left[E_{spm}[X]\right].
+\]
+The first term represents average sampling variability across players, while the second represents variation in their underlying expected metric values.
+
+The discrimination of metric $m$ in season $s$ is therefore defined as
+\[
+\mathcal{D}_{sm}
+=
+1-
+\frac{
+E_{sm}\left[V_{spm}[X]\right]
+}{
+V_{sm}[X]
+}.
+\]
+This quantity represents the proportion of observed between-player variance that is not attributable to sampling variability \citep{franks_meta-analytics_2016}. A value near one indicates that observed differences between players are large relative to sampling noise, whereas a value near zero indicates that much of the apparent between-player variation could arise from chance. When discrimination is summarized across multiple seasons, we use
+\[
+\mathcal{D}_{m}
+=
+E_m[\mathcal{D}_{sm}].
+\]
+
+% TODO: Finalize whether discrimination is reported primarily by season, as an across-season average, or both once the multi-league analysis is complete.
+
+\subsection{Stability}
+
+Discrimination describes differences among players within a season, while stability concerns variation in the same player's performance across seasons. An observed player-season metric may change because of genuine changes in player ability or context, but it may also fluctuate because each season contains only a finite sample of observations. Stability therefore removes sampling variability before assessing systematic season-to-season change.
+
+Following \citep{franks_meta-analytics_2016}, stability for metric $m$ is defined as
+\[
+\mathcal{S}_{m}
+=
+1-
+\frac{
+E_m\left[V_{pm}[X]-V_{spm}[X]\right]
+}{
+V_m[X]-E_m\left[V_{spm}[X]\right]
+}.
+\]
+The numerator represents average within-player variation across seasons after removing sampling variability, while the denominator represents total variation in the metric after removing the same source of noise. Consequently, a metric with little systematic season-to-season variation has a stability value near one, whereas a metric that changes substantially within players over time has a lower stability value.
+
+At the population level, $\mathcal{S}_{m}$ lies between zero and one \citep{franks_meta-analytics_2016}. We retain this population definition but modify the finite-sample estimator used for the within-player variance. The estimator presented by \citep{franks_meta-analytics_2016} normalizes each player's squared season-to-season deviations by $1/S_p$, where $S_p$ is the number of qualifying seasons observed for player $p$. In our volleyball data, many players are observed for only two or three qualifying seasons, making the downward finite-sample bias associated with this normalization non-negligible. We therefore use the unbiased sample-variance normalization $1/(S_p-1)$ for the within-player variance component. Sampling variability is still removed at the player-season level as in the original framework. Thus, the underlying stability estimand remains unchanged; the modification is intended only to reduce finite-sample bias arising from the comparatively short player histories available in our data.
+
+% TODO: Revisit the wording and reported stability estimator after the final reliability implementation has been reviewed and merged.
+
+\subsection{Independence}
+
+Two metrics may individually be reliable while nevertheless containing largely overlapping information. To evaluate redundancy among metrics with different marginal distributions, we follow the Gaussian copula formulation of \citep{franks_meta-analytics_2016}. Let $\mathbf{Z}_{sp}$ denote an $M$-dimensional latent vector corresponding to the $M$ metrics observed for player $p$ in season $s$, where
+\[
+\mathbf{Z}_{sp}
+\sim
+\operatorname{MVN}(\mathbf{0},C),
+\]
+and $C$ is an $M \times M$ latent correlation matrix. The observed value of metric $m$ is represented as
+\[
+X_{spm}
+=
+F_m^{-1}\left[\Phi(Z_{spm})\right],
+\]
+where $F_m$ is the marginal cumulative distribution function of metric $m$ and $\Phi$ is the standard normal cumulative distribution function.
+
+For a target metric $m$ and a conditioning set of other metrics $\mathcal{M}$, independence is defined as
+\[
+\mathcal{I}_{m\mathcal{M}}
+=
+\frac{
+\operatorname{Var}
+\left[
+Z_{spm}
+\mid
+\{Z_{spq}:q\in\mathcal{M}\}
+\right]
+}{
+\operatorname{Var}[Z_{spm}]
+}.
+\]
+Because the latent variables are standardized, this reduces to
+\[
+\mathcal{I}_{m\mathcal{M}}
+=
+C_{m,m}
+-
+C_{m,\mathcal{M}}
+C_{\mathcal{M},\mathcal{M}}^{-1}
+C_{\mathcal{M},m}.
+\]
+Equivalently, $\mathcal{I}_{m\mathcal{M}}=1-R^2$ for the regression of the latent representation of metric $m$ on the latent representations of the conditioning metrics \citep{franks_meta-analytics_2016}. Values near zero indicate that a metric is largely explained by the other available metrics, whereas values near one indicate that it provides comparatively unique information.
+
+We additionally use principal component analysis (PCA) of the latent correlation matrix $C$ to characterize redundancy within sets of metrics. If
+\[
+C
+=
+U\Lambda U^{T},
+\]
+where $\Lambda=\operatorname{diag}(\lambda_1,\ldots,\lambda_M)$ contains the ordered eigenvalues of $C$, then the cumulative proportion of variance explained by the first $k$ principal components is
+\[
+\mathcal{F}_{k}
+=
+\frac{
+\sum_{i=1}^{k}\lambda_i
+}{
+\sum_{i=1}^{M}\lambda_i
+}.
+\]
+A large value of $\mathcal{F}_{k}$ for small $k$ indicates that much of the information contained in the original metrics can be represented using substantially fewer dimensions \citep{franks_meta-analytics_2016}.
+
+\subsection{Estimation}
+
+Sampling variability required for the discrimination and stability calculations is estimated nonparametrically using bootstrap resampling. Following the game-level approach of \citep{franks_meta-analytics_2016}, matches are treated as blocks and resampled with replacement within each player-season. All observations belonging to a selected match are retained together when constructing a bootstrap replicate. This preserves within-match dependence among sets and actions rather than treating observations from the same match as independent.
+
+For each player-season and metric, the season metric is recalculated for each bootstrap replicate. The sample variance of these replicated values, denoted
+\[
+BV[X_{spm}],
+\]
+provides an estimate of $V_{spm}[X]$, the sampling variability associated with that player-season metric. The remaining between-player, within-player, and total variance components are estimated using the corresponding sample moments of the observed player-season values. Bootstrap variability is estimated separately for each player-season so that the sampling-noise estimate corresponds to the same observations contributing to the relevant variance calculation.
+
+In the current implementation, each season is resampled 100 times using a fixed random seed for reproducibility. Observed player-seasons are required to satisfy a minimum participation threshold before contributing to the reliability analysis. Because the number of sets represented in a resampled season can vary when whole matches are sampled as blocks, bootstrap replicates use a slightly lower qualifying threshold to avoid excluding players solely because of resampling variation.
+
+% TODO: Verify the final number of bootstrap replicates, participation thresholds, and replicate-qualification rule once the full multi-league analysis has been implemented.
+
+For independence, the latent correlation matrix $C$ is estimated using the semiparametric rank-likelihood approach followed by \citep{franks_meta-analytics_2016}. This approach avoids requiring explicit estimation of the marginal distributions of the individual metrics and accommodates continuous and discrete metrics as well as missing observations. Following the original framework, the model is fit in R using the \texttt{sbgcop} package.
+
+% TODO: Add the appropriate methodological/software citations for the semiparametric rank-likelihood approach and sbgcop once the corresponding references have been added to references.bib.
+
+% TODO: Finalize and document whether independence is estimated by pooling seasons within each league or separately by season once all league data are available.
+
+Using the estimated latent correlation matrix, we calculate independence scores from $\mathcal{I}_{m\mathcal{M}}$ and generate independence curves following the greedy procedure of \citep{franks_meta-analytics_2016}. Beginning with the full set of conditioning metrics, metrics are successively removed according to which removal produces the largest increase in the target metric's independence. PCA of the same latent correlation matrix provides an additional summary of the dimensionality and redundancy of the metric set.
+
+Meta-analytic quantities are estimated separately within each league, and cross-league comparisons are made using the resulting meta-metric estimates rather than by directly pooling raw metric values across competitions.
+
 
 \section{Results}
 
 \subsection{Basic Metrics}
 
+
+
 \subsection{Advanced Metrics}
 
-For each metric:
-- talk about how it was derived, what it is purposed to do, and how it's implemented
+For each metric, spend 3 sentences each
+
+\begin{itemize}
+    \item define the metric and its purpose
+    \item "derive" the metric
+    \item describe how we implement it
+\end{itemize}
 
 \subsection{Discussion}
 
@@ -135,9 +304,6 @@ None declared.
 \subsection*{Conflict of Interest}
 
 The authors state no conflict of interest.
-
-\subsection*{Data}
-The data utilized in this paper come from publicly available Major League Volleyball data, sourced using the \texttt{rvolleydata} R package \citep{awosoga_rvolleydata_2026}
 
 \subsection*{Supplementary Material}
 Complete code necessary to reproduce the data cleaning, modeling, analysis, and visualizations found in this paper can be found on GitHub at \url{https://padasdaf.github.io/Volleyball-Meta-Analytics/}
