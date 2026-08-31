@@ -57,7 +57,6 @@ Our objective is therefore not to identify a single universally ``best'' volleyb
 \subsection{Volleyball and Performance Analysis}
 
 Indoor volleyball is a rally-based team sport in which two teams of six players attempt to ground the ball on the opponent's court while preventing the opponent from doing the same. When a team controls the ball during a rally, play typically progresses through a sequence of contacts such as reception or defense, setting, and attack, while serving and blocking provide additional opportunities to directly influence the outcome of a rally. Players also occupy specialized roles, including setters, outside and opposite hitters, middle blockers, and liberos, which differ substantially in both their responsibilities and their opportunities to perform particular actions. Consequently, individual volleyball performance is inherently multidimensional and role-dependent: a statistic that is informative for one position may have limited relevance for another.
-
 This structure has motivated analyses extending beyond conventional box-score summaries. Studies have examined which skills differentiate winning and losing performances in closely contested sets \citep{drikos_contribution_2020}, how situational constraints influence setter decision-making and offensive distribution \citep{rocha_setting_2021, nascimento_decision-making_2023}, and how spatial and physical information can be used to characterize interactions among attackers, blockers, and court defenders \citep{cantu-gonzalez_attack-block-court_2022}. These approaches illustrate the variety of dimensions through which volleyball performance can be studied and provide additional context for why evaluating players often requires multiple statistics rather than a single summary measure.
 
 \subsection{Related Work}
@@ -94,9 +93,9 @@ The empirical distribution of a particular metric may differ across competitive 
 
 \subsection{Meta-Analytic Framework}
 
-We adapt the meta-analytic framework of \citep{franks_meta-analytics_2016} to individual-player volleyball metrics. Let $X$ denote the three-dimensional array of observed metric values indexed by season $s$, player $p$, and metric $m$, with $X_{spm}$ representing the value of metric $m$ for player $p$ in season $s$. Because observed metric values are calculated from a finite number of volleyball actions or matches, $X_{spm}$ contains both systematic variation and sampling variability.
+We adapt the meta-analytic framework of \citep{franks_meta-analytics_2016} to individual-player volleyball metrics. Let $X_{spm}$ denote the observed value of metric $m$ for player $p$ in season $s$. Because these values are calculated from a finite number of volleyball actions or matches, observed player-season metrics contain both systematic variation and sampling variability.
 
-Following \citep{franks_meta-analytics_2016}, we use conditional expectation and variance notation to distinguish variation across the dimensions of $X$. In particular,
+Following \citep{franks_meta-analytics_2016}, expectations and variances are indexed by the dimensions held fixed. For example,
 \[
 E_{spm}[X]
 =
@@ -108,23 +107,11 @@ V_{spm}[X]
 =
 \operatorname{Var}[X \mid S=s,P=p,M=m],
 \]
-with analogous notation such as $V_{sm}[X]$, $V_{pm}[X]$, and $V_m[X]$ used when variation is taken across players, seasons, or both. The quantity $V_{spm}[X]$ represents sampling variability for a particular player-season metric, whereas the remaining variance terms describe variation across observed players and seasons.
-
-The framework evaluates each metric according to three complementary properties: discrimination, stability, and independence. These quantify, respectively, the extent to which a metric distinguishes players beyond sampling noise, persists within players across seasons, and contributes information not already contained in other metrics \citep{franks_meta-analytics_2016}.
+where $V_{spm}[X]$ represents the sampling variability associated with a particular player-season metric. Analogous quantities such as $V_{sm}[X]$, $V_{pm}[X]$, and $V_m[X]$ describe variation across players, seasons, or both.
 
 \subsection{Discrimination}
 
-For a metric to reliably differentiate players within a season, a substantial proportion of its observed between-player variation should reflect systematic differences between players rather than sampling variability. By the law of total variance,
-\[
-V_{sm}[X]
-=
-E_{sm}\left[V_{spm}[X]\right]
-+
-V_{sm}\left[E_{spm}[X]\right].
-\]
-The first term represents average sampling variability across players, while the second represents variation in their underlying expected metric values.
-
-The discrimination of metric $m$ in season $s$ is therefore defined as
+Discrimination measures the extent to which observed differences between players within a season reflect systematic between-player variation rather than sampling noise. For metric $m$ in season $s$, it is defined as
 \[
 \mathcal{D}_{sm}
 =
@@ -135,7 +122,9 @@ E_{sm}\left[V_{spm}[X]\right]
 V_{sm}[X]
 }.
 \]
-This quantity represents the proportion of observed between-player variance that is not attributable to sampling variability \citep{franks_meta-analytics_2016}. A value near one indicates that observed differences between players are large relative to sampling noise, whereas a value near zero indicates that much of the apparent between-player variation could arise from chance. When discrimination is summarized across multiple seasons, we use
+The numerator represents average sampling variability across players, while the denominator represents the total observed between-player variance. Values near one therefore indicate that players are well differentiated relative to the amount of sampling noise, whereas values near zero indicate that much of the observed variation may be attributable to chance \citep{franks_meta-analytics_2016}.
+
+When discrimination is summarized across multiple seasons, we use
 \[
 \mathcal{D}_{m}
 =
@@ -146,7 +135,7 @@ E_m[\mathcal{D}_{sm}].
 
 \subsection{Stability}
 
-Discrimination describes differences among players within a season, while stability concerns variation in the same player's performance across seasons. An observed player-season metric may change because of genuine changes in player ability or context, but it may also fluctuate because each season contains only a finite sample of observations. Stability therefore removes sampling variability before assessing systematic season-to-season change.
+Stability measures how consistently a player's underlying metric value persists across seasons after accounting for sampling variability. Observed season-to-season changes may reflect genuine changes in player ability or context, but they may also arise from finite-sample variation.
 
 Following \citep{franks_meta-analytics_2016}, stability for metric $m$ is defined as
 \[
@@ -159,44 +148,17 @@ E_m\left[V_{pm}[X]-V_{spm}[X]\right]
 V_m[X]-E_m\left[V_{spm}[X]\right]
 }.
 \]
-The numerator represents average within-player variation across seasons after removing sampling variability, while the denominator represents total variation in the metric after removing the same source of noise. Consequently, a metric with little systematic season-to-season variation has a stability value near one, whereas a metric that changes substantially within players over time has a lower stability value.
+The numerator represents within-player variation across seasons after accounting for sampling variability, while the denominator represents total variation in the metric after removing the same source of noise. Values near one indicate that a metric is relatively persistent within players across seasons, whereas lower values indicate greater systematic season-to-season variation.
 
-At the population level, $\mathcal{S}_{m}$ lies between zero and one \citep{franks_meta-analytics_2016}. We retain this population definition but modify the finite-sample estimator used for the within-player variance. The estimator presented by \citep{franks_meta-analytics_2016} normalizes each player's squared season-to-season deviations by $1/S_p$, where $S_p$ is the number of qualifying seasons observed for player $p$. In our volleyball data, many players are observed for only two or three qualifying seasons, making the downward finite-sample bias associated with this normalization non-negligible. We therefore use the unbiased sample-variance normalization $1/(S_p-1)$ for the within-player variance component. Sampling variability is still removed at the player-season level as in the original framework. Thus, the underlying stability estimand remains unchanged; the modification is intended only to reduce finite-sample bias arising from the comparatively short player histories available in our data.
+We retain the population definition of stability from \citep{franks_meta-analytics_2016} but modify the finite-sample estimator of the within-player variance. Their estimator normalizes each player's squared season-to-season deviations by $1/S_p$, where $S_p$ is the number of qualifying seasons observed for player $p$. Because many players in our volleyball data are observed for only two or three qualifying seasons, the resulting downward finite-sample bias is non-negligible. We therefore use the unbiased sample-variance normalization $1/(S_p-1)$. This adjustment changes only the finite-sample estimation of the within-player variance; the underlying stability estimand remains unchanged.
 
-% TODO: Revisit the wording and reported stability estimator after the final reliability implementation has been reviewed and merged.
+% TODO: Verify the corrected stability estimator in the final implementation and update any implementation-specific details if necessary.
 
 \subsection{Independence}
 
-Two metrics may individually be reliable while nevertheless containing largely overlapping information. To evaluate redundancy among metrics with different marginal distributions, we follow the Gaussian copula formulation of \citep{franks_meta-analytics_2016}. Let $\mathbf{Z}_{sp}$ denote an $M$-dimensional latent vector corresponding to the $M$ metrics observed for player $p$ in season $s$, where
-\[
-\mathbf{Z}_{sp}
-\sim
-\operatorname{MVN}(\mathbf{0},C),
-\]
-and $C$ is an $M \times M$ latent correlation matrix. The observed value of metric $m$ is represented as
-\[
-X_{spm}
-=
-F_m^{-1}\left[\Phi(Z_{spm})\right],
-\]
-where $F_m$ is the marginal cumulative distribution function of metric $m$ and $\Phi$ is the standard normal cumulative distribution function.
+Independence measures how much information a metric contributes beyond that already contained in other metrics. Because volleyball metrics may have substantially different marginal distributions, we follow the Gaussian copula formulation of \citep{franks_meta-analytics_2016}. Let $C$ denote the latent correlation matrix among the metrics after mapping them to a common latent Gaussian scale.
 
 For a target metric $m$ and a conditioning set of other metrics $\mathcal{M}$, independence is defined as
-\[
-\mathcal{I}_{m\mathcal{M}}
-=
-\frac{
-\operatorname{Var}
-\left[
-Z_{spm}
-\mid
-\{Z_{spq}:q\in\mathcal{M}\}
-\right]
-}{
-\operatorname{Var}[Z_{spm}]
-}.
-\]
-Because the latent variables are standardized, this reduces to
 \[
 \mathcal{I}_{m\mathcal{M}}
 =
@@ -206,47 +168,29 @@ C_{m,\mathcal{M}}
 C_{\mathcal{M},\mathcal{M}}^{-1}
 C_{\mathcal{M},m}.
 \]
-Equivalently, $\mathcal{I}_{m\mathcal{M}}=1-R^2$ for the regression of the latent representation of metric $m$ on the latent representations of the conditioning metrics \citep{franks_meta-analytics_2016}. Values near zero indicate that a metric is largely explained by the other available metrics, whereas values near one indicate that it provides comparatively unique information.
+Equivalently, $\mathcal{I}_{m\mathcal{M}}=1-R^2$ for the regression of the latent representation of metric $m$ on the latent representations of the conditioning metrics \citep{franks_meta-analytics_2016}. Values near zero indicate that the target metric is largely explained by the other available metrics, whereas values near one indicate that it contributes comparatively unique information.
 
-We additionally use principal component analysis (PCA) of the latent correlation matrix $C$ to characterize redundancy within sets of metrics. If
-\[
-C
-=
-U\Lambda U^{T},
-\]
-where $\Lambda=\operatorname{diag}(\lambda_1,\ldots,\lambda_M)$ contains the ordered eigenvalues of $C$, then the cumulative proportion of variance explained by the first $k$ principal components is
-\[
-\mathcal{F}_{k}
-=
-\frac{
-\sum_{i=1}^{k}\lambda_i
-}{
-\sum_{i=1}^{M}\lambda_i
-}.
-\]
-A large value of $\mathcal{F}_{k}$ for small $k$ indicates that much of the information contained in the original metrics can be represented using substantially fewer dimensions \citep{franks_meta-analytics_2016}.
+We additionally use principal component analysis (PCA) of the latent correlation matrix to summarize redundancy across sets of metrics. If the first few principal components explain a large proportion of the total variation, then much of the information contained in the original metric set can be represented using substantially fewer dimensions. Independence curves are also constructed using the greedy metric-removal procedure of \citep{franks_meta-analytics_2016} to examine how the uniqueness of a target metric changes as conditioning metrics are removed.
 
 \subsection{Estimation}
 
-Sampling variability required for the discrimination and stability calculations is estimated nonparametrically using bootstrap resampling. Following the game-level approach of \citep{franks_meta-analytics_2016}, matches are treated as blocks and resampled with replacement within each player-season. All observations belonging to a selected match are retained together when constructing a bootstrap replicate. This preserves within-match dependence among sets and actions rather than treating observations from the same match as independent.
+Sampling variability required for the discrimination and stability calculations is estimated nonparametrically using bootstrap resampling. Following the game-level approach of \citep{franks_meta-analytics_2016}, matches are treated as blocks and resampled with replacement. All observations from a selected match are retained together, preserving dependence among observations from the same match.
 
-For each player-season and metric, the season metric is recalculated for each bootstrap replicate. The sample variance of these replicated values, denoted
+For each player-season and metric, the season metric is recalculated across bootstrap replicates. The variance of these replicated values,
 \[
 BV[X_{spm}],
 \]
-provides an estimate of $V_{spm}[X]$, the sampling variability associated with that player-season metric. The remaining between-player, within-player, and total variance components are estimated using the corresponding sample moments of the observed player-season values. Bootstrap variability is estimated separately for each player-season so that the sampling-noise estimate corresponds to the same observations contributing to the relevant variance calculation.
+is used to estimate the sampling variability $V_{spm}[X]$. The remaining variance components required for discrimination and stability are estimated from the observed player-season metric values.
 
-In the current implementation, each season is resampled 100 times using a fixed random seed for reproducibility. Observed player-seasons are required to satisfy a minimum participation threshold before contributing to the reliability analysis. Because the number of sets represented in a resampled season can vary when whole matches are sampled as blocks, bootstrap replicates use a slightly lower qualifying threshold to avoid excluding players solely because of resampling variation.
+In the current implementation, 100 bootstrap replicates are generated using a fixed random seed for reproducibility. Player-seasons are required to satisfy a minimum participation threshold before contributing to the reliability analysis, while bootstrap replicates use a slightly lower qualifying threshold to account for variation introduced by match resampling.
 
 % TODO: Verify the final number of bootstrap replicates, participation thresholds, and replicate-qualification rule once the full multi-league analysis has been implemented.
 
-For independence, the latent correlation matrix $C$ is estimated using the semiparametric rank-likelihood approach followed by \citep{franks_meta-analytics_2016}. This approach avoids requiring explicit estimation of the marginal distributions of the individual metrics and accommodates continuous and discrete metrics as well as missing observations. Following the original framework, the model is fit in R using the \texttt{sbgcop} package.
+For independence, the latent correlation matrix $C$ is estimated in R using the semiparametric rank-likelihood approach followed by \citep{franks_meta-analytics_2016}, implemented with the \texttt{sbgcop} package \citep{hoff_sbgcop_2025}. This approach avoids requiring explicit estimation of the marginal distributions of individual metrics and accommodates continuous and discrete measures as well as missing observations.
 
 % TODO: Add the appropriate methodological/software citations for the semiparametric rank-likelihood approach and sbgcop once the corresponding references have been added to references.bib.
 
-% TODO: Finalize and document whether independence is estimated by pooling seasons within each league or separately by season once all league data are available.
-
-Using the estimated latent correlation matrix, we calculate independence scores from $\mathcal{I}_{m\mathcal{M}}$ and generate independence curves following the greedy procedure of \citep{franks_meta-analytics_2016}. Beginning with the full set of conditioning metrics, metrics are successively removed according to which removal produces the largest increase in the target metric's independence. PCA of the same latent correlation matrix provides an additional summary of the dimensionality and redundancy of the metric set.
+% TODO: Finalize whether independence is estimated by pooling seasons within each league or separately by season once all league data are available.
 
 Meta-analytic quantities are estimated separately within each league, and cross-league comparisons are made using the resulting meta-metric estimates rather than by directly pooling raw metric values across competitions.
 
