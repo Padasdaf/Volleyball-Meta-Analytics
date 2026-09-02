@@ -1,25 +1,20 @@
-\documentclass[10 pt, fullpage]{article}
+\documentclass[10pt]{article}
 
 \usepackage{geometry}
- \geometry{
- letterpaper,
- total={7in,9.5in},
- left=0.75in,
- top=0.75in,
- }
-
- \usepackage{xcolor}
+\geometry{
+    letterpaper,
+    total={7in,9.5in},
+    left=0.75in,
+    top=0.75in
+}
 
 \usepackage[round]{natbib}
 \renewcommand{\bibname}{References}
 \renewcommand{\bibsection}{\subsubsection*{\bibname}}
 
-\usepackage{algorithm}
-\usepackage{algpseudocode}
 \usepackage{amssymb, amsmath}
 \usepackage{graphicx}
 \usepackage[colorlinks=true, citecolor=blue, urlcolor=blue]{hyperref}
-\usepackage{soul}
 
 \bibliographystyle{apalike}
 
@@ -35,12 +30,23 @@
 
 
 % TODO after Zotero sync: verify the exported citation keys for
-% Raymond et al. (Attack Evenness), the Evollve glossary, and sbgcop 0.975.
+% Raymond et al. (Attack Evenness), ovlytics, the Evollve glossary,
+% Hoff (2007), and sbgcop 0.975.
 
 
 \section{Abstract}
 
-Meta-analytics \citep{franks_meta-analytics_2016} can be used to evaluate the quality of metrics that assess player ability in sports. This helps stakeholders make effective comparisons between players without being overwhelmed by metrics that lack practical significance, technical depth, or appropriate data considerations. Meta-analytics are based on three criteria: \textit{stability}, \textit{discrimination}, and \textit{independence}. Stability quantifies how consistent a player’s value for metric $m$ remains across seasons after accounting for random noise, capturing its sensitivity to change. Discrimination measures how well a metric differentiates between players based on the proportion of total between-player variance in metric $m$ that reflects true differences in player ability rather than sampling variability. Independence measures how much unique information a metric $m$ adds beyond the set of other metrics $\mathcal{M}$. In this work, we apply meta-analytics to evaluate the quality and underlying properties of a set of both conventional \citep{major_league_volleyball_statistics_2024} and advanced volleyball metrics \citep{burton_linear_2015, hass_exploring_2018, raymond_attack_2024, evollve_glossary_nodate} using open-source professional women's volleyball data from Major League Volleyball (MLV), League One Volleyball Pro (LOVB), and Athletes Unlimited Pro Volleyball (AU) \citep{awosoga_pyvolleydata_2026, awosoga_rvolleydata_2026}. From these analyses, we comprehensively identify and provide commentary on the metrics that provide the most unique and reliable information for the wider volleyball community, including stakeholders such as coaches, athletes, and fans. By accounting for the heterogeneous distributions of league-specific data, we are able to compare and contrast metric interpretation and utility across leagues. Such analysis has not been performed in the volleyball analytics literature and consequently fills a major gap, particularly with the proliferation of advanced metrics that have been introduced in the past few years. Our findings provide a greater understanding of the properties of current statistics and identify areas where improvements in independence, stability, and discrimination can be made when developing new metrics.
+Meta-analytics \citep{franks_meta-analytics_2016} can be used to evaluate the quality of metrics that assess player ability in sports. 
+This helps stakeholders make effective comparisons between players without being overwhelmed by metrics that are heavily influenced by sampling variability or provide largely redundant information. 
+Meta-analytics are based on three criteria: \textit{stability}, \textit{discrimination}, and \textit{independence}. 
+Stability quantifies how consistent a player’s value for metric $m$ remains across seasons after accounting for random noise, capturing its sensitivity to change. 
+Discrimination measures how well a metric differentiates between players based on the proportion of total between-player variance in metric $m$ that reflects true differences in player ability rather than sampling variability. 
+Independence measures how much unique information a metric $m$ adds beyond the set of other metrics $\mathcal{M}$. 
+In this work, we apply meta-analytics to evaluate the quality and underlying properties of a set of both conventional \citep{major_league_volleyball_statistics_2024} and advanced volleyball metrics \citep{burton_linear_2015, hass_exploring_2018, raw, evollve} using open-source professional women's volleyball data from Major League Volleyball (MLV), League One Volleyball Pro (LOVB), and Athletes Unlimited Pro Volleyball (AU) \citep{awosoga_pyvolleydata_2026}. 
+From these analyses, we identify and provide commentary on the metrics that provide the most unique and reliable information for the wider volleyball community, including stakeholders such as coaches, athletes, and fans. 
+By accounting for the heterogeneous distributions of league-specific data, we are able to compare and contrast the statistical properties of metrics across leagues. 
+Such analysis has not been performed in the volleyball analytics literature and consequently fills a major gap, particularly with the proliferation of advanced metrics that have been introduced in the past few years. 
+Our findings provide a greater understanding of the properties of current statistics and identify areas where improvements in independence, stability, and discrimination can be made when developing new metrics.
 
 
 \section{Introduction}
@@ -53,9 +59,7 @@ More recent volleyball analytics research has moved beyond conventional box-scor
 
 The proliferation of such metrics raises a complementary question to metric construction: \emph{how should the statistical properties of the metrics themselves be evaluated?} A metric may have an intuitive interpretation or a sophisticated derivation while still being strongly affected by limited playing time or random variation. Similarly, several apparently different metrics may encode largely overlapping information. These issues are especially relevant when comparing players, where observed differences should ideally reflect systematic differences rather than sampling variability, and when combining multiple metrics, where redundant statistics should not be interpreted as independent evidence. The meta-analytic perspective provides a systematic way to study these properties without requiring all metrics to have the same scale, distribution, or underlying construction \citep{franks_meta-analytics_2016}.
 
-In this paper, we adapt the meta-analytic framework to individual-player metrics in professional women's volleyball. We evaluate each metric in terms of discrimination, stability, and independence, corresponding respectively to its ability to distinguish players relative to sampling noise, its persistence across seasons, and the information it contributes beyond other available metrics \citep{franks_meta-analytics_2016}. We apply these tools to conventional statistics, previously proposed advanced metrics, and metrics defined by the Evollve statistics glossary across Major League Volleyball (MLV), League One Volleyball Pro (LOVB), and Athletes Unlimited Pro Volleyball (AU). Because the information available in the underlying public data differs across competitions, metric availability is preserved by league rather than forcing unsupported metrics into a common analysis set.
-
-Our objective is therefore not to identify a single universally ``best'' volleyball metric. Rather, we seek to characterize the statistical information provided by different metrics. Metrics with high discrimination more clearly separate players relative to their estimated sampling variability, highly stable metrics exhibit greater persistence across seasons, and highly independent metrics contribute information that is less redundant with other available measures. Conversely, identifying metrics with substantial sampling variability or redundancy can help prevent overinterpretation and inform the construction of future volleyball statistics. To our knowledge, a systematic meta-analytic evaluation of this kind has not previously been applied to professional women's volleyball. By extending the framework to multiple professional competitions, this study provides a unified assessment of the statistical properties of existing volleyball metrics and a foundation for evaluating newly developed metrics as volleyball data and analytics continue to expand.
+In this paper, we adapt the meta-analytic framework to individual-player metrics in professional women's volleyball. We evaluate metrics in terms of discrimination, stability, and independence across Major League Volleyball (MLV), League One Volleyball Pro (LOVB), and Athletes Unlimited Pro Volleyball (AU), while preserving league-specific metric availability rather than forcing unsupported metrics into a common analysis set. Our objective is not to identify a single universally ``best'' volleyball metric, but rather to characterize the statistical information provided by different metrics and identify where sampling variability or redundancy may complicate their interpretation. To our knowledge, a systematic meta-analytic evaluation of this kind has not previously been applied to professional women's volleyball.
 
 
 \section{Background}
@@ -64,15 +68,13 @@ Our objective is therefore not to identify a single universally ``best'' volleyb
 
 Indoor volleyball is a rally-based team sport in which two teams of six players attempt to ground the ball on the opponent's court while preventing the opponent from doing the same. When a team controls the ball during a rally, play typically progresses through a sequence of contacts such as reception or defense, setting, and attack, while serving and blocking provide additional opportunities to directly influence the outcome of a rally. Players also occupy specialized roles, including setters, outside and opposite hitters, middle blockers, and liberos, which differ substantially in both their responsibilities and their opportunities to perform particular actions. Consequently, individual volleyball performance is inherently multidimensional and role-dependent: a statistic that is informative for one position may have limited relevance for another.
 
-This structure has motivated analyses extending beyond conventional box-score summaries. Studies have examined which skills differentiate winning and losing performances in closely contested sets \citep{drikos_contribution_2020}, how situational constraints influence setter decision-making and offensive distribution \citep{rocha_setting_2021, nascimento_decision-making_2023}, and how spatial and physical information can be used to characterize interactions among attackers, blockers, and court defenders \citep{cantu-gonzalez_attack-block-court_2022}.
-
 \subsection{Related Work}
 
 Meta-analysis traditionally refers to the statistical analysis of results from multiple studies for the purpose of integrating their findings \citep{glass_primary_1976}. The sports meta-analytic framework considered here differs in its object of analysis: rather than synthesizing results across studies, it evaluates the statistical properties of performance metrics themselves.
 
 This framework was formalized by \citet{franks_meta-analytics_2016} and originally demonstrated using more than 70 player-performance metrics from the National Basketball Association (NBA) and 40 metrics from the National Hockey League (NHL). The study evaluated existing measures according to discrimination, stability, and independence, demonstrating that metrics with substantially different constructions and distributions could be assessed within a common framework.
 
-The NBA and NHL applications revealed substantial variation in the statistical properties of familiar performance measures. In the NBA, rebounds, blocks, and assists were highly discriminative and stable, whereas raw three-point percentage exhibited comparatively low discrimination and stability \citep{franks_meta-analytics_2016}. The analysis also identified considerable redundancy among several omnibus measures of player performance, with the first principal component of five such metrics explaining approximately 73\% of their variation \citep{franks_meta-analytics_2016}. In the NHL, hits, blocks, and shots were relatively discriminative and stable, while plus-minus exhibited comparatively low discrimination; the framework also highlighted overlap among related families of measures such as Corsi and Fenwick \citep{franks_meta-analytics_2016}.
+The NBA and NHL applications revealed substantial variation in the statistical properties of familiar performance measures. In the NBA, rebounds, blocks, and assists were highly discriminative and stable, whereas raw three-point percentage exhibited comparatively low discrimination and stability \citep{franks_meta-analytics_2016}. The analysis also identified considerable redundancy among several omnibus measures of player performance, with the first principal component of five such metrics explaining approximately 73\% of their variation. In the NHL, hits, blocks, and shots were relatively discriminative and stable, while plus-minus exhibited comparatively low discrimination; the framework also highlighted overlap among related families of measures such as Corsi and Fenwick \citep{franks_meta-analytics_2016}.
 
 Subsequent applications have extended this perspective to other sports. Meta-analytics have been applied to soccer statistics to examine how strongly metrics differentiate players and how their values persist over time \citep{elhabr_tonys_2023}. More recently, \citet{matteo_understanding_2026} evaluated discrimination and stability for 33 player- and team-level performance indicators across nine seasons of Australian Football. Count-based measures such as kicks, handballs, disposals, and goals generally exhibited high discrimination and stability, whereas several percentage-based metrics were less reliable. The study also found that these properties varied across playing positions, reinforcing the importance of context when interpreting performance measures.
 
@@ -81,21 +83,17 @@ Despite applications of meta-analytic approaches to performance metrics across s
 
 \section{Data}
 
-Volleyball data are available at different levels of granularity, with richer data supporting increasingly contextual measures of player performance. We use two primary forms of data in this study: box-score and play-by-play data.
+We use both box-score and play-by-play data. Box-score records provide aggregated player statistics such as serving, attacking, reception, setting, digging, and blocking outcomes and support conventional counting, rate, percentage, and efficiency metrics. Player-information records additionally provide identifiers and positional information used to associate performances with individual players across matches and seasons.
 
-Box-score data provide aggregated summaries of player performance within sets and matches. Available variables include serving quantities such as attempts, aces, and errors; attacking quantities such as attempts, kills, and errors; reception outcomes; assists; digs; and blocking statistics. These data provide broad coverage across players and competitions and are sufficient for constructing many conventional counting, rate, percentage, and efficiency metrics. Player-information records additionally provide identifiers and positional information that can be used to associate performances with individual players across matches and seasons.
+Play-by-play records retain the sequence and context of actions within rallies, including information such as the set and point, team and player involved, action outcome, score, and point winner. These records support metrics that depend on rally phase, action ordering, or on-court context rather than only aggregate outcomes. Consequently, metric availability differs across leagues according to the granularity and reliability of their available source data.
 
-Play-by-play data retain the sequence and context of individual actions within rallies. In addition to identifying the action and its outcome, these records may include information such as the set and point in which the action occurred, the team and player involved, the current score, and the point winner. Relative to box scores, play-by-play data support metrics that depend on the circumstances or ordering of individual actions rather than only their aggregate outcomes. Consequently, the metrics that can be evaluated for a particular league or season depend on the granularity and reliability of the available data.
-
-The study draws exclusively on professional women's volleyball data from Major League Volleyball (MLV), League One Volleyball Pro (LOVB), and Athletes Unlimited Pro Volleyball (AU). Public data are accessed through the \texttt{pyvolleydata} Python package \citep{awosoga_pyvolleydata_2026}, which provides schedule, player-information, player-boxscore, play-by-play, event-log, and team-boxscore data for the competitions considered here. The final study includes MLV seasons from 2024--2026, LOVB seasons from 2025--2026, and AU seasons from 2022--2025.
+The study draws exclusively on professional women's volleyball data from Major League Volleyball (MLV), League One Volleyball Pro (LOVB), and Athletes Unlimited Pro Volleyball (AU). Public data are accessed through the \texttt{pyvolleydata} Python package \citep{awosoga_pyvolleydata_2026}. The final study includes MLV seasons from 2024--2026, LOVB seasons from 2025--2026, and AU seasons from 2022--2025.
 
 For MLV, the analysis retains regular-season competition only, yielding 84 matches in 2024 and 112 matches in each of 2025 and 2026. For LOVB, the 2025 analysis retains 48 ordinary regular-season matches and excludes the LOVB Classic and championship tournament. The 2026 analysis retains 60 regular-season matches and excludes postseason competition; the three 2026 Classic matches remain in scope because they were designated as regular-season matches. Team-name differences across LOVB source products are resolved using source-supported aliases before analysis.
 
 Athletes Unlimited differs structurally from MLV and LOVB because players do not have persistent season-long team assignments. The analysis therefore maintains persistent player identity separately from contextual squad assignment. After excluding test and exhibition competition, the retained AU samples contain 30 matches in each of 2022, 2023, and 2024, and 24 matches in 2025. Golden Set observations are excluded from the ordinary player-performance scope rather than treated as standard sets.
 
-To support consistent metric construction across these competitions, league-specific source records are mapped into a common canonical representation containing schedule, player participation, player metadata, ordered actions, rallies, lineups, and persistent identity information. League-specific adapters handle competition filtering, source corrections, team aliases, and identity reconciliation before downstream metric calculation. Unsupported or ambiguous source information is retained as missing or excluded from the relevant metric calculation rather than being replaced with inferred proxy values.
-
-Because metric distributions and availability differ across competitions, all subsequent analyses preserve league-specific populations.
+League-specific records are mapped into a common representation before metric calculation. Competition filtering, source corrections, team aliases, and persistent player identities are handled at this stage, while unsupported or ambiguous information is retained as missing or excluded from the relevant metric rather than replaced with inferred proxy values. Because metric distributions and availability differ across competitions, all subsequent analyses preserve league-specific populations.
 
 
 \section{Methodology}
@@ -104,7 +102,7 @@ Because metric distributions and availability differ across competitions, all su
 
 We adapt the meta-analytic framework of \citet{franks_meta-analytics_2016} to individual-player volleyball metrics. Let $X_{spm}$ denote the observed value of metric $m$ for player $p$ in season $s$, and let $V_{spm}[X]$ denote its sampling variability. Following \citet{franks_meta-analytics_2016}, we evaluate metrics according to three statistical properties: discrimination, stability, and independence. All meta-analytic quantities are estimated separately within each league.
 
-The final numerical analysis contains 30 metrics for MLV and LOVB and 17 metrics for AU. The definitions and implementations of the individual metrics are described in Section~6.
+The definitions and implementations of the individual metrics are described in Section~6.
 
 \subsection{Discrimination}
 
@@ -186,13 +184,13 @@ Equivalently, $\mathcal{I}_{m\mathcal{M}}=1-R^2$ on the latent Gaussian scale. L
 
 We estimate $C$ using the semiparametric rank-likelihood approach of \citet{hoff_extending_2007}, as in \citet{franks_meta-analytics_2016}, using \texttt{sbgcop} version 0.975 \citep{hoff_sbgcop_2012}. Seasons are pooled within each league for this analysis. Metric-defined missing values are retained, and no complete-case or reliability-based filtering is applied. The resulting independence populations contain 392 MLV, 192 LOVB, and 177 AU player-seasons.
 
-Each league-specific model uses 5,000 MCMC iterations with a fixed seed of 42 and retains 1,000 posterior correlation matrices; their posterior mean is used as $C$. We then construct the greedy independence curves of \citet{franks_meta-analytics_2016}, perform principal component analysis (PCA) on $C$ to summarize redundancy, and use complete-linkage hierarchical clustering with Euclidean distances between the rows of $|C|$ to identify metrics with similar correlation profiles.
+Each league-specific model uses 5,000 MCMC iterations with a fixed seed of 42, output density 5, and the package-default plug-in treatment of marginal distributions. This retains 1,000 posterior correlation matrices, whose posterior mean is used as $C$. We then construct the greedy independence curves of \citet{franks_meta-analytics_2016}, perform principal component analysis (PCA) on $C$, and use complete-linkage hierarchical clustering with Euclidean distances between the rows of $|C|$ to identify metrics with similar correlation profiles.
 
 \subsection{Estimation}
 
 Sampling variability for discrimination and stability is estimated using the game-level bootstrap of \citet{franks_meta-analytics_2016}. Within each season, each team independently resamples its played matches with replacement, and all player observations belonging to a selected team-match are retained together. For AU, temporary week-squad assignments serve as the corresponding team blocks.
 
-The reliability population is fixed from the observed data before resampling. A player-season must contain at least 20 actual played sets. In addition, kill percentage and attack efficiency require at least 20 attack attempts, passing efficiency requires at least 20 receptions, and serving efficiency requires at least 20 serves. These eligibility thresholds are applied to the observed player-season population before resampling and are not reapplied within individual bootstrap replicates.
+The reliability population is fixed from the observed data before resampling. A player-season must contain at least 20 actual played sets. In addition, Kill Percentage and Hitting Efficiency require at least 20 attack attempts, Passing Efficiency requires at least 20 receptions, and Serving Efficiency requires at least 20 serves. These eligibility thresholds are applied before resampling and are not reapplied within individual bootstrap replicates.
 
 We generate 100 bootstrap replicates for each league-season using a fixed seed of 42. Each metric is reconstructed from the resampled match blocks rather than by resampling completed player-season values. Count- and rate-based metrics are recalculated from their underlying sufficient statistics, while metrics requiring deterministic recalculation or model fitting are recomputed according to their corresponding procedures described in Section~6.2.
 
@@ -206,48 +204,49 @@ is used to estimate $V_{spm}[X]$. The remaining variance components required for
 
 For corrected stability, uncertainty is additionally summarized using a player-cluster bootstrap. Players are resampled as clusters so that all qualifying seasons belonging to a selected player remain together, and the corrected stability estimator is recomputed for each draw. Percentile-based 95\% confidence intervals are obtained from 2,000 such resamples.
 
-Discrimination, stability, and independence are interpreted as statistical properties of the metrics within the observed league populations. They do not by themselves establish predictive value, causal importance, or overall sporting usefulness.
-
 
 \section{Metrics}
 
 \subsection{Conventional Metrics}
 
-We evaluate fourteen conventional player-performance metrics derived from commonly reported volleyball box-score statistics \citep{major_league_volleyball_statistics_2024}. Ten are expressed on a per-set basis: kills (K/S), attack errors (E/S), assists (AST/S), service aces (SA/S), service errors (SE/S), reception errors (RE/S), digs (D/S), block touches (BT/S), blocks (B/S), and points (PTS/S), where points are the sum of kills, service aces, and blocks. We additionally consider kill percentage (K\%), hitting efficiency (Eff), passing efficiency (Pass Eff), and serving efficiency (Serve Eff), which normalize performance by the corresponding number of attacking, reception, or serving opportunities.
-
+We evaluate fourteen conventional player-performance metrics derived from commonly reported volleyball box-score statistics \citep{major_league_volleyball_statistics_2024}. Ten are expressed on a per-set basis: kills (K/S), attack errors (E/S), assists (AST/S), service aces (SA/S), service errors (SE/S), reception errors (RE/S), digs (D/S), block touches (BT/S), blocks (B/S), and points (PTS/S), where points are the sum of kills, service aces, and blocks. We additionally consider Kill Percentage (K\%), Hitting Efficiency, Passing Efficiency, and Serving Efficiency, which normalize performance by the corresponding number of attacking, reception, or serving opportunities.
 
 \subsection{Advanced Metrics}
 
 In addition to the conventional statistics, we evaluate sixteen advanced metrics: three metrics previously proposed in the volleyball analytics literature and thirteen metrics defined by the public Evollve statistics glossary. The previously proposed metrics are implemented as closely as possible to their defining sources, while the Evollve glossary is treated as the formula authority for the remaining metrics \citep{evollve_glossary_nodate}. All sixteen metrics are evaluated for MLV and LOVB, while AU supports only the three Evollve metrics that can be calculated directly from its available box-score data.
 
-% TODO after Zotero sync: verify the exported citation keys for
-% Raymond et al. (Attack Evenness), ovlytics, and the Evollve glossary.
-
 Point Scoring Fraction (PSF) was proposed by \citet{burton_linear_2015} to evaluate serving performance while jointly accounting for aces, service errors, and the opponent's ability to side out when the serve remains in play. It is defined as
+
 \[
 \mathrm{PSF}
 =
 a+(1-a-e)(1-s),
 \]
+
 where $a$ and $e$ are the proportions of serves resulting in aces and errors, respectively, and $s$ is the opponent sideout proportion conditional on serves that end in neither an ace nor an error. We calculate PSF directly from these outcomes without smoothing or an additional volume threshold, with the metric left undefined when a player has no in-play serves from which $s$ can be calculated.
 
 Attack Evenness (AEV) measures how evenly a setter distributes attacking opportunities among available hitters relative to a reference attack distribution \citep{raymond_attack_2024}. Given an observed attack distribution $\mathbf{a}$ and reference distribution $\mathbf{r}$, the metric takes the form
+
 \[
 \mathrm{AEV}
 =
 1-\frac{1}{2}\sum_i |a_i-r_i|,
 \]
-with larger values indicating a distribution closer to the reference profile. We calculate AEV using the authors' \texttt{ovlytics} implementation, version 0.3.3, reconstructing the required lineup and setter information from the available data and preserving the source's attack-volume and reporting requirements \citep{raymond_ovlytics_2024}.
+
+with larger values indicating a distribution closer to the reference profile. We calculate AEV using the authors' \texttt{ovlytics} implementation, version 0.3.3, reconstructing the required lineup and setter information and preserving the source's attack-volume and reporting requirements \citep{raymond_ovlytics_2024}.
 
 Adjusted Plus-Minus (APM) estimates a player's association with point outcomes while accounting simultaneously for the other players on court \citep{hass_exploring_2018}. Player effects are estimated through ridge logistic regression and transformed to the published scale as
+
 \[
 50\operatorname{logit}^{-1}(\beta_j)-25,
 \]
+
 where $\beta_j$ is the fitted coefficient for player $j$. We reconstruct the model using complete observed lineups and complementary observations of each point from the two teams' perspectives; because the source does not fully specify penalty selection, we use ten-fold deviance cross-validation and select \texttt{lambda.min}.
 
 The remaining thirteen advanced metrics are based on definitions in the public Evollve statistics glossary \citep{evollve_glossary_nodate}. Fully specified formulas are implemented directly, while phase, action-ancestry, and on-court exposure quantities are reconstructed conservatively from ordered play-by-play and lineup information. Ambiguous sequences are excluded rather than assigned heuristically, and no additional smoothing, volume thresholds, or clipping are introduced.
 
-Serve-Receive Hitting Percentage measures attacking performance specifically on attacks occurring during the serve-receive phase. It is calculated as
+Serve-Receive Hitting Percentage measures attacking performance on attacks occurring during the serve-receive phase. It is calculated as
+
 \[
 \frac{
 \text{serve-receive kills}-\text{serve-receive errors}
@@ -255,9 +254,11 @@ Serve-Receive Hitting Percentage measures attacking performance specifically on 
 \text{serve-receive attacks}
 }.
 \]
-We classify an attack as serve-receive when it follows a reception within the same possession, excluding attacks whose phase cannot be determined reliably.
 
-Transition Hitting Percentage applies the same hitting-percentage construction to attacks occurring after a defensive transition. It is calculated as
+An attack is classified as serve-receive when it follows a reception within the same possession; attacks whose phase cannot be determined reliably are excluded.
+
+Transition Hitting Percentage applies the same construction to attacks occurring after a defensive transition:
+
 \[
 \frac{
 \text{transition kills}-\text{transition errors}
@@ -265,9 +266,11 @@ Transition Hitting Percentage applies the same hitting-percentage construction t
 \text{transition attacks}
 }.
 \]
-We classify an attack as transition when it follows a dig within the same possession, while attacks without sufficient preceding control information are excluded from the phase-specific calculation.
 
-Serve-Receive Hit Average provides a weighted measure of serve-receive attacking outcomes in which kills receive full credit and nonterminal attacks receive partial credit. It is calculated as
+An attack is classified as transition when it follows a dig within the same possession.
+
+Serve-Receive Hit Average assigns full credit to kills and partial credit to nonterminal attacks during serve receive:
+
 \[
 \frac{
 \text{serve-receive kills}
@@ -277,9 +280,11 @@ Serve-Receive Hit Average provides a weighted measure of serve-receive attacking
 \text{serve-receive attacks}
 }.
 \]
-We use the same reconstructed serve-receive phases as above and retain the published weight of $0.433$ without modification.
 
-Transition Hit Average applies the corresponding weighted measure to attacks occurring during transition. It is defined as
+We use the same reconstructed serve-receive phases and retain the published weight of $0.433$.
+
+Transition Hit Average applies the corresponding weighted construction to transition attacks:
+
 \[
 \frac{
 \text{transition kills}
@@ -289,13 +294,15 @@ Transition Hit Average applies the corresponding weighted measure to attacks occ
 \text{transition attacks}
 }.
 \]
-Transition opportunities are reconstructed from dig-to-attack sequences within the same possession, using the published $0.433$ weight and excluding unresolved phases.
 
-Dig Attack Conversion Percentage measures how often a successful dig is followed by an ensuing attack by the same team. It is calculated as the number of modeled digs leading to a subsequent team attack divided by the total number of modeled digs. Each successful dig is linked only to the first later attack in the same possession, with no later possession used to infer a conversion.
+Transition opportunities are reconstructed from dig-to-attack sequences within the same possession.
 
-Dig Kill Percentage measures how often a successful dig is followed by an ensuing attack that results in a kill. It is calculated as the number of modeled digs whose subsequent same-possession attack is a kill divided by the total number of modeled digs. We reconstruct the dig-to-attack relationship from ordered actions and require the ensuing attack to have an unambiguous outcome.
+Dig Attack Conversion Percentage measures how often a successful dig is followed by an ensuing attack by the same team. It is calculated as the number of modeled digs leading to a subsequent same-possession attack divided by the total number of modeled digs. Each successful dig is linked only to the first later attack in the same possession.
 
-Dig Rate measures the proportion of opponent attacking opportunities for which an on-court player records a dig. It is calculated as
+Dig Kill Percentage measures how often a successful dig is followed by an ensuing attack that results in a kill. Its numerator consists of modeled digs whose subsequent same-possession attack is a kill, using the same modeled-dig denominator as Dig Attack Conversion Percentage. The ensuing attack must have an unambiguous outcome.
+
+Dig Rate measures the proportion of opponent attacking opportunities for which an on-court player records a dig:
+
 \[
 \frac{
 \text{player digs}
@@ -303,9 +310,11 @@ Dig Rate measures the proportion of opponent attacking opportunities for which a
 \text{opponent attacks while the player is on court}
 }.
 \]
-The denominator is reconstructed only from rallies with complete lineup information, with attributed digs required to be consistent with the player's reconstructed court presence.
 
-Reception Rate measures the proportion of opponent serve opportunities received by a player while that player is on court. It is calculated as
+On-court exposure is calculated only where complete lineup information is available.
+
+Reception Rate measures the proportion of opponent serve opportunities received by a player while that player is on court:
+
 \[
 \frac{
 \text{player receptions}
@@ -313,9 +322,11 @@ Reception Rate measures the proportion of opponent serve opportunities received 
 \text{opponent serves while the player is on court}
 }.
 \]
-Both the numerator and denominator are restricted to rallies with complete reconstructed lineups so that reception counts and exposure are measured over the same scope.
 
-Percentage of Points Won While On Court measures the proportion of points won by a player's team while that player is on the court. It is calculated as
+Numerators and exposure denominators are restricted to the same reconstructed on-court scope.
+
+Percentage of Points Won While On Court measures the proportion of points won by a player's team while that player is on court:
+
 \[
 \frac{
 \text{team points won while the player is on court}
@@ -323,9 +334,11 @@ Percentage of Points Won While On Court measures the proportion of points won by
 \text{points played while the player is on court}
 }.
 \]
-We calculate this metric only for rallies with complete lineup information so that every point in the denominator can be associated reliably with the player.
 
-Blocked Rate measures the proportion of a player's attack attempts that result in a blocked attack error. It is calculated as
+Only points with complete lineup information enter the calculation.
+
+Blocked Rate measures the proportion of a player's attack attempts that result in a blocked attack error:
+
 \[
 \frac{
 \text{blocked attack errors}
@@ -333,9 +346,11 @@ Blocked Rate measures the proportion of a player's attack attempts that result i
 \text{attack attempts}
 }.
 \]
-Both quantities are available directly from the canonical box-score data, allowing the metric to be implemented without additional play-by-play reconstruction.
 
-Serve Average assigns full credit to aces, zero credit to service errors, and partial credit to other serves. It is calculated as
+Both quantities are obtained directly from box-score data.
+
+Serve Average assigns full credit to aces, zero credit to service errors, and partial credit to other serves:
+
 \[
 \frac{
 \text{aces}
@@ -345,9 +360,11 @@ Serve Average assigns full credit to aces, zero credit to service errors, and pa
 \text{serves}
 }.
 \]
-We calculate the metric directly from serving box-score totals using the published weight of $0.435$.
 
-Attack Error Rate Excluding Blocks measures attacking errors that are not attributed to the attacker being blocked. It is calculated as
+We retain the published weight of $0.435$.
+
+Attack Error Rate Excluding Blocks measures attack errors that are not attributed to the attacker being blocked:
+
 \[
 \frac{
 \text{unblocked attack errors}
@@ -355,9 +372,11 @@ Attack Error Rate Excluding Blocks measures attacking errors that are not attrib
 \text{attack attempts}
 }.
 \]
-The required quantities are available directly from the canonical box-score data, allowing the glossary definition to be implemented without sequence reconstruction.
 
-Kill Rate per Rally Point expresses a player's kills relative to the number of rally points for which that player is on court rather than relative to their number of attack attempts. It is calculated as
+Both quantities are available directly from box-score data.
+
+Kill Rate per Rally Point expresses a player's kills relative to the number of rally points for which that player is on court:
+
 \[
 \frac{
 \text{kills}
@@ -365,20 +384,21 @@ Kill Rate per Rally Point expresses a player's kills relative to the number of r
 \text{on-court rally points}
 },
 \]
-where rally points exclude points terminating directly on a service ace or service error. We reconstruct the denominator from complete lineups and validated rally outcomes so that kills and on-court exposure are measured over a consistent scope.
+
+where rally points exclude points terminating directly on a service ace or service error. The denominator is reconstructed from complete lineups and validated rally outcomes.
 
 
 \section{Results}
 
 \subsection{Discrimination and Stability}
 
-Figure~\ref{fig:reliability} compares latest-season discrimination with corrected stability for each metric. Discrimination varied substantially across metrics but showed several common patterns across leagues. In MLV, the largest discrimination estimates were observed for Assists/set (0.991), Kills/set (0.963), Points/set (0.961), Reception Rate (0.951), and Digs/set (0.944), while Dig Kill Percentage (0.147), Percentage of Points Won While On Court (0.269), and PSF (0.277) had the smallest estimates. LOVB similarly showed high discrimination for Assists/set (0.989), Kills/set (0.971), Points/set (0.968), and Reception Rate (0.951), whereas Dig Kill Percentage (0.049), Dig Attack Conversion Percentage (0.112), and Serve Average (0.127) were among the lowest. In AU, Assists/set (0.993), Kills/set (0.979), Points/set (0.974), Digs/set (0.951), and Attack Errors/set (0.950) had the largest estimates, while Passing Efficiency (0.481) and Serve Average (0.580) had the smallest.
+Figure~\ref{fig:reliability} compares latest-season discrimination with corrected stability. Several conventional per-set measures were consistently highly discriminative across leagues: Assists/set had the largest estimate in MLV (0.991), LOVB (0.989), and AU (0.993), while Kills/set and Points/set also exceeded 0.96 in each league. In MLV and LOVB, Reception Rate was similarly discriminative (0.951 in both), whereas several contextual advanced metrics showed substantially lower values, including Dig Kill Percentage in MLV (0.147) and LOVB (0.049) and Dig Attack Conversion Percentage in LOVB (0.112). AU exhibited a narrower range, with Passing Efficiency producing its lowest discrimination estimate (0.481).
 
-Corrected stability exhibited greater variation across both metrics and leagues. In MLV, the largest estimates were observed for PSF (1.660), Attack Error Rate Excluding Blocks (1.164), Hitting Efficiency (1.151), Dig Kill Percentage (1.118), and Kill Percentage (1.076), whereas Blocked Rate (-0.091), Serve Average (0.338), and AEV (0.536) were among the smallest. LOVB produced large estimates for Dig Attack Conversion Percentage (1.166), Transition Hit Average (1.150), Kill Percentage (1.052), and Hitting Efficiency (1.032), while Attack Error Rate Excluding Blocks (-0.470), Serve-Receive Hitting Percentage (-0.298), PSF (-0.256), and Serve-Receive Hit Average (-0.191) produced negative estimates. AU was more tightly concentrated within the unit interval, with its largest stability estimates for Assists/set (0.971), Blocks/set (0.931), Digs/set (0.919), and Reception Errors/set (0.914), and its smallest for Hitting Efficiency (0.199), Kill Percentage (0.386), and Attack Error Rate Excluding Blocks (0.434).
+Corrected stability varied more strongly across leagues. MLV produced high estimates for PSF (1.660), Hitting Efficiency (1.151), and Kill Percentage (1.076), while AEV (0.536), Serve Average (0.338), and Blocked Rate (-0.091) were less stable. In LOVB, Dig Attack Conversion Percentage (1.166) and Transition Hit Average (1.150) had high estimates, whereas several metrics produced negative estimates, including Attack Error Rate Excluding Blocks (-0.470), Serve-Receive Hitting Percentage (-0.298), and PSF (-0.256). AU estimates remained within the unit interval, with Assists/set (0.971), Blocks/set (0.931), and Digs/set (0.919) among the most stable and Hitting Efficiency (0.199) and Kill Percentage (0.386) among the least stable.
 
-Several corrected stability estimates for MLV and LOVB fell below zero or exceeded one. As described in Section~5.3, these estimates were retained without clipping because the corrected finite-sample, noise-adjusted estimator is not constrained to the theoretical population interval. Dig Kill Percentage did not produce a corrected stability estimate for LOVB because its noise-adjusted between-player denominator was nonpositive.
+Several corrected stability estimates for MLV and LOVB fell below zero or exceeded one. As described in Section~5.3, these values are retained without clipping because the corrected finite-sample estimator is not constrained to the theoretical population interval. Dig Kill Percentage did not produce a corrected stability estimate for LOVB because its noise-adjusted between-player denominator was nonpositive.
 
-\begin{figure}[ht]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=\textwidth]{figures/Figure_1_Reliability_All.pdf}
     \caption{Latest-season discrimination and corrected stability for MLV, LOVB, and AU. Estimates are shown without clipping.}
@@ -388,13 +408,13 @@ Several corrected stability estimates for MLV and LOVB fell below zero or exceed
 
 \subsection{Independence}
 
-Figure~\ref{fig:independence} presents the greedy conditional-independence curves for each league. Under full conditioning on all other available metrics, MLV showed the largest independence values for Passing Efficiency (0.787), Dig Kill Percentage (0.778), Dig Attack Conversion Percentage (0.746), AEV (0.739), and PSF (0.737). The smallest values were observed for Points/set (0.146), Kills/set (0.154), Serve Average (0.156), Serving Efficiency (0.156), and Serve-Receive Hit Average (0.159).
+Figure~\ref{fig:independence} presents the greedy conditional-independence curves for each league. Under full conditioning, Passing Efficiency was among the most independent metrics in all three leagues, with values of 0.787 in MLV, 0.858 in LOVB, and 0.795 in AU. In MLV and LOVB, AEV and the two dig-conversion measures also contributed comparatively distinct latent information: AEV reached 0.739 and 0.890, respectively, while Dig Kill Percentage reached 0.778 and 0.866.
 
-LOVB showed a similar separation between several highly independent and highly redundant metrics. AEV (0.890), Dig Kill Percentage (0.866), Passing Efficiency (0.858), Dig Attack Conversion Percentage (0.782), and Attack Error Rate Excluding Blocks (0.742) had the largest full-conditioning independence values. Points/set (0.272), Kills/set (0.288), Serve Average (0.297), Serve-Receive Hit Average (0.299), and Serve-Receive Hitting Percentage (0.301) had the smallest.
+Several commonly reported metrics were substantially more redundant. Points/set and Kills/set were among the lowest full-conditioning independence measures in both MLV and LOVB, while the serving family---including Serve Average and Serving Efficiency---also showed low independence across leagues. In AU, Service Errors/set had the lowest value (0.105), followed by Aces/set (0.166), Serving Efficiency (0.171), and Serve Average (0.177).
 
-For AU, Passing Efficiency had the largest full-conditioning independence value at 0.795, followed by Reception Errors/set (0.655), Block Touches/set (0.625), Blocked Rate (0.621), and Attack Error Rate Excluding Blocks (0.618). The smallest values were observed for Service Errors/set (0.105), Aces/set (0.166), Serving Efficiency (0.171), Serve Average (0.177), and Points/set (0.191). Across the greedy curves, independence increased as conditioning metrics were removed and reached one when the conditioning set became empty, as implied by the construction of the measure.
+Across all greedy curves, independence increased as conditioning metrics were removed and reached one when the conditioning set became empty, as implied by the construction of the measure.
 
-\begin{figure}[ht]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=\textwidth]{figures/Figure_2_Independence_Curves_All.pdf}
     \caption{Greedy conditional-independence curves for MLV, LOVB, and AU. The highlighted curves correspond to the five metrics with the largest full-conditioning independence values in each league.}
@@ -404,80 +424,92 @@ For AU, Passing Efficiency had the largest full-conditioning independence value 
 
 \subsection{PCA and Clustering}
 
-Principal component analysis of the latent correlation matrices showed that the metric sets could be reduced in dimension, although a substantial number of components was required to preserve most of the latent variation. As shown in Figure~\ref{fig:pca}, MLV required 11, 16, and 21 principal components to explain 80\%, 90\%, and 95\% of the variance, respectively. LOVB required 13, 19, and 23 components at the same thresholds, while AU required 7, 10, and 12 components from its smaller set of 17 metrics.
+Principal component analysis of the latent correlation matrices indicated substantial but incomplete redundancy among the analyzed metrics. As shown in Figure~\ref{fig:pca}, MLV required 11, 16, and 21 principal components to explain 80\%, 90\%, and 95\% of latent variance, respectively. LOVB required 13, 19, and 23 components, while AU required 7, 10, and 12 components from its smaller 17-metric set.
 
-\begin{figure}[ht]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.45\textwidth]{figures/Figure_3_PCA_Cumulative_Variance.pdf}
     \caption{Cumulative variance explained by principal components of the posterior-mean latent correlation matrix for MLV, LOVB, and AU.}
     \label{fig:pca}
 \end{figure}
 
-The hierarchical clustering results in Figure~\ref{fig:clustering} further characterize similarities in the latent correlation profiles of the metrics. Kills/set and Points/set merged at relatively small distances in all three leagues, as did Serve Average and Serving Efficiency. For MLV and LOVB, Serve-Receive Hit Average clustered closely with Serve-Receive Hitting Percentage, while Transition Hit Average similarly clustered with Transition Hitting Percentage. These relationships arise from complete-linkage clustering of Euclidean distances between rows of the absolute latent correlation matrix and therefore describe similarity in overall correlation profiles rather than only the pairwise correlation between two metrics.
+The hierarchical clustering results in Figure~\ref{fig:clustering} further characterize similarities in metric correlation profiles. Kills/set and Points/set clustered closely in all three leagues, as did Serve Average and Serving Efficiency. In MLV and LOVB, Serve-Receive Hit Average clustered closely with Serve-Receive Hitting Percentage, while Transition Hit Average clustered with Transition Hitting Percentage. These clusters reflect similarity across rows of the absolute latent correlation matrix rather than only pairwise correlation between the metrics themselves.
 
-\begin{figure}[ht]
+\begin{figure}[htbp]
     \centering
 
     \begin{minipage}{0.32\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/Figure_4_Dendrogram_MLV.pdf}
+
+        (a) MLV
     \end{minipage}
     \hfill
     \begin{minipage}{0.32\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/Figure_4_Dendrogram_LOVB.pdf}
+
+        (b) LOVB
     \end{minipage}
     \hfill
     \begin{minipage}{0.32\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/Figure_4_Dendrogram_AU.pdf}
+
+        (c) AU
     \end{minipage}
 
-    \caption{Complete-linkage hierarchical clustering of metric correlation profiles for MLV, LOVB, and AU. Distances are Euclidean distances between rows of the absolute posterior-mean latent correlation matrix.}
+    \caption{Complete-linkage hierarchical clustering of metric correlation profiles. Distances are Euclidean distances between rows of the absolute posterior-mean latent correlation matrix.}
     \label{fig:clustering}
 \end{figure}
 
 
 \section{Discussion}
 
-The results demonstrate that discrimination, stability, and independence capture distinct properties of volleyball metrics and should therefore be considered jointly rather than interpreted in isolation. Several conventional per-set statistics, particularly Assists/set, Kills/set, and Points/set, were highly discriminative across leagues, indicating that observed differences between players were large relative to their estimated sampling variability. This broadly resembles the pattern observed by \citet{franks_meta-analytics_2016}, where several commonly recorded counting statistics also exhibited strong discrimination. However, strong discrimination did not necessarily imply either high stability or high independence, emphasizing that a metric can distinguish players clearly within a season while still changing substantially across seasons or overlapping heavily with other measures.
+The results demonstrate that discrimination, stability, and independence capture distinct properties of volleyball metrics and should therefore be considered jointly. Several conventional per-set statistics, particularly Assists/set, Kills/set, and Points/set, were highly discriminative across leagues, broadly resembling the strong discrimination of several commonly recorded counting statistics found by \citet{franks_meta-analytics_2016}. However, Kills/set and Points/set were also among the least independent metrics in MLV and LOVB. Conversely, advanced metrics such as AEV and the dig-conversion measures contributed comparatively distinct information despite lower discrimination or stability in some settings. A metric can therefore distinguish players clearly without adding much new information, or capture a comparatively distinct aspect of performance while remaining sensitive to sampling variability or season-to-season change.
 
-This distinction is particularly apparent when comparing conventional and advanced metrics. Points/set and Kills/set were among the most discriminative metrics in both MLV and LOVB, but they were also among the least independent, suggesting that much of the information they provide is shared with other available metrics. Conversely, several advanced metrics---including AEV, PSF, Dig Kill Percentage, and Dig Attack Conversion Percentage---showed relatively high independence in MLV or LOVB despite having substantially lower discrimination or stability in some cases. These results illustrate an important feature of the meta-analytic framework: a metric can capture a comparatively distinct aspect of player performance without necessarily measuring that aspect with low sampling variability or strong persistence across seasons. Independence should therefore not be interpreted as evidence that a metric is inherently more informative or useful, but rather that its information is less redundant with the remaining metric set.
+The cross-league results also show that the statistical properties of a metric are not necessarily intrinsic to the metric itself. Although some discrimination patterns were consistent, stability differed considerably across MLV, LOVB, and AU; PSF, for example, had a large corrected stability estimate in MLV but a negative estimate in LOVB. Such differences may reflect variation in player populations, season length, player movement, competitive structure, opportunity distributions, or available data. A metric that behaves reliably in one competition should therefore not automatically be assumed to have the same statistical properties in another.
 
-The cross-league results also show that the statistical properties of a metric are not necessarily intrinsic to the metric itself. Although some patterns were consistent---such as the high discrimination of Assists/set, Kills/set, and Points/set---stability in particular differed considerably between MLV, LOVB, and AU. PSF, for example, produced a large corrected stability estimate in MLV but a negative estimate in LOVB, while several attacking efficiency measures were relatively unstable in AU. Such differences may arise from variation in player populations, season length, player movement, competitive structure, opportunity distributions, or the amount and quality of available data. Consequently, a metric that behaves reliably in one competition should not automatically be assumed to possess the same statistical properties in another.
+PCA and clustering reinforce the distinction between redundancy and unique information. Although the original metric sets could be reduced in dimension, a substantial number of principal components was still required to retain most latent variation, indicating that the collection was not dominated by only a few common dimensions. At the same time, several intuitive clusters appeared repeatedly, such as Kills/set with Points/set and Serve Average with Serving Efficiency, while closely related serve-receive and transition attacking measures also clustered together. These patterns identify groups of statistics that may provide overlapping descriptions of player performance.
 
-The PCA and clustering results provide additional evidence that the metric set contains both substantial redundancy and meaningful distinct information. Eleven of 30 principal components were required to explain 80\% of latent variation in MLV and thirteen of 30 in LOVB, while seven of 17 were required in AU. Thus, the analyzed metrics cannot be reduced to only a few dimensions without discarding a substantial portion of their latent variation. At the same time, several intuitive clusters appeared consistently, including Kills/set with Points/set and Serve Average with Serving Efficiency, while the serve-receive and transition variants of Hitting Percentage and Hit Average also clustered closely in MLV and LOVB. These relationships are consistent with the formulas and underlying volleyball actions shared by the paired metrics and provide a useful indication of where multiple statistics may be describing similar aspects of performance.
+Several limitations affect the interpretation of the reliability estimates. Only a small number of seasons are available for each professional competition, leaving many repeated players with two or three qualifying seasons; this motivates the $1/(S_p-1)$ correction but does not eliminate uncertainty from short longitudinal histories. Advanced measures requiring detailed sequence or lineup information also have more restricted coverage, and AEV in particular is available for relatively few player-seasons because of its source-defined setter and attack-volume requirements. Ambiguous sequence or lineup information is treated as missing rather than assigned heuristically, prioritizing source fidelity at the cost of coverage.
 
-The corrected stability estimates also require careful interpretation. Several estimates in MLV and LOVB fell below zero or above one because the finite-sample estimator subtracts estimated sampling variance and is not itself constrained to the theoretical $[0,1]$ range. These values should not be interpreted literally as negative persistence or as stability exceeding a theoretical maximum; rather, they indicate that the estimated variance components are sufficiently close to their boundaries that finite-sample uncertainty can move the resulting estimate outside the population parameter space. This issue is especially relevant in the present study because only a small number of seasons are available for each professional league, leaving many repeated players with only two or three qualifying seasons. The corrected $1/(S_p-1)$ estimator used in this study reduces the downward finite-sample bias of the original within-player variance estimator, but it does not eliminate uncertainty arising from short longitudinal histories.
+More broadly, discrimination, stability, and independence should not be interpreted as direct measures of a statistic's predictive value, causal contribution to winning, or usefulness in a particular coaching decision. A highly discriminative and stable metric may reflect persistent role or opportunity patterns, while a less stable but highly independent measure may capture contextual information absent from conventional statistics. Meta-analytics instead provide a complementary framework for understanding whether observed player differences exceed sampling noise, persist over time, and duplicate information already contained in other measures. Future volleyball metrics can therefore be evaluated not only according to their interpretation or relationship with outcomes, but also according to whether they contribute reliable and genuinely complementary statistical information.
 
-Several additional data limitations affect the interpretation of individual metrics. Advanced measures that require detailed sequence or lineup information can only be evaluated when those inputs can be reconstructed with sufficient fidelity, which is why AU contains a smaller metric set than MLV and LOVB. AEV additionally has substantially fewer finite player-season observations because its source methodology imposes setter- and attack-volume requirements, making its estimates less directly comparable in precision to metrics observed for nearly all players. Some sequence-based measures are likewise calculated only when rally phase or action ancestry can be established from the available play-by-play data. Our conservative approach treats ambiguous observations as missing rather than assigning unsupported classifications, reducing coverage in exchange for maintaining fidelity to the metric definitions.
-
-More broadly, the meta-analytic properties evaluated here should not be interpreted as direct measures of a statistic's relationship with winning, causal contribution to team success, or usefulness in a particular coaching decision. A highly stable and discriminative metric may primarily describe a persistent player role or opportunity pattern, while a less stable but highly independent metric may capture contextual information absent from traditional box scores. The value of a metric ultimately depends on the analytical question for which it is being used. Meta-analytics instead provide a complementary perspective by identifying which metrics reliably distinguish players, which properties persist across seasons, and where ostensibly different statistics contain overlapping information.
-
-Taken together, these findings suggest that future volleyball metrics should be evaluated not only according to their interpretation or relationship with outcomes, but also according to the statistical properties of the information they provide. Metrics that introduce new contextual information may be particularly valuable when they improve independence without sacrificing excessive discrimination or stability, while highly redundant metrics may offer limited additional information despite being individually reliable. Applying the same framework as richer professional volleyball data become available may therefore help distinguish genuinely complementary measures from those that largely reproduce information already represented by existing statistics.
 
 
 \section{Conclusion}
 
+% TODO: Summarize the primary findings and contributions after the
+% Discussion is finalized.
+
+
 \subsection{Future Work}
 
-\subsection*{Acknowledgment}
+% TODO: Discuss longer longitudinal samples, richer professional data,
+% additional source-faithful metrics, position-specific meta-analysis,
+% and evaluation against predictive or decision-specific objectives.
 
-This work was made possible through collaboration within the \href{https://www.uwaggs.ca}{\ul{University of Waterloo Analytics Group for Games and Sports (UWAGGS)}}. We are grateful for the insightful comments and feedback of Dr. Samuel WK Wong, Associate Professor in the Department of Statistics and Actuarial Science at the University of Waterloo.
 
-\subsection*{Funding}
+% \subsection*{Acknowledgment}
 
-None declared.
+% This work was made possible through collaboration within the \href{https://www.uwaggs.ca}{University of Waterloo Analytics Group for Games and Sports (UWAGGS)}. We are grateful for the insightful comments and feedback of Dr. Samuel WK Wong, Associate Professor in the Department of Statistics and Actuarial Science at the University of Waterloo.
 
-\subsection*{Conflict of Interest}
+% \subsection*{Funding}
 
-The authors state no conflict of interest.
+% None declared.
 
-\subsection*{Supplementary Material}
-Complete code necessary to reproduce the data cleaning, modeling, analysis, and visualizations found in this paper can be found on GitHub at \url{https://padasdaf.github.io/Volleyball-Meta-Analytics/}
+% \subsection*{Conflict of Interest}
+
+% The authors state no conflict of interest.
+
+% \subsection*{Supplementary Material}
+
+% Complete code necessary to reproduce the data cleaning, metric construction, analysis, and visualizations in this paper is available at \url{https://github.com/Padasdaf/Volleyball-Meta-Analytics-Implementation}.
 
 \clearpage
 \thispagestyle{empty}
 
 \bibliography{references}
+
 \end{document}
