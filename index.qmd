@@ -354,7 +354,7 @@ Because only three of the thirteen Evollve metrics can be computed directly from
 
 ### Discrimination and Stability
 
-Figures 1a, 2a, and 3a compare latest-season discrimination with corrected stability across the three leagues.
+Figures [1a](#fig-meta-mlv), [2a](#fig-meta-lovb), and [3a](#fig-meta-au) compare latest-season discrimination with corrected stability across the three leagues.
 Several conventional per-set measures were consistently highly discriminative across leagues: `Assists/set` had the largest estimate in MLV (0.991), LOVB Pro (0.989), and AU Pro (0.993), while `Kills/set` and `Points/set` also exceeded 0.96 in each league.
 In MLV and LOVB Pro, `Reception Rate` was similarly discriminative (0.951 in both), whereas several contextual advanced metrics showed substantially lower values, including `Dig Kill Percentage` in MLV (0.147) and LOVB Pro (0.049) and `Dig Attack Conversion Percentage` in LOVB Pro (0.112).
 AU Pro exhibited a narrower range, with `Passing Efficiency` producing its lowest discrimination estimate (0.481).
@@ -369,7 +369,7 @@ As these leagues continue to operate in more seasons, we expect stability values
 
 ### Independence
 
-Figures 1b, 2b, and 3b present the greedy conditional-independence curves for the three leagues.
+Figures [1b](#fig-meta-mlv), [2b](#fig-meta-lovb), and [3b](#fig-meta-au) present the greedy conditional-independence curves for the three leagues.
 Under full conditioning, `Passing Efficiency` was among the most independent metrics in all three leagues, with values of 0.787 in MLV, 0.858 in LOVB Pro, and 0.795 in AU Pro.
 In MLV and LOVB Pro, `AEV` and the two dig-conversion measures also provided relatively unique information: `AEV` reached 0.739 and 0.890, respectively, while `Dig Kill Percentage` reached 0.778 and 0.866.
 Several commonly reported metrics were substantially more redundant, with `Points/set` and `Kills/set` among the lowest full-conditioning independence measures in both MLV and LOVB Pro.
