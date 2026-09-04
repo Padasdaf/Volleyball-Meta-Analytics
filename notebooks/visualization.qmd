@@ -909,7 +909,7 @@ plt.close(fig)
 
 ```{python}
 #| label: fig-pca
-#| fig-cap: "Cumulative variance explained by principal components of the posterior-mean latent correlation matrix for MLV, LOVB Pro, and AU Pro."
+#| fig-cap: "Cumulative variance explained by principal components of the posterior-mean latent correlation matrix."
 #| fig-align: center
 
 fig = pca_figure()
