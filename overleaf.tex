@@ -66,20 +66,20 @@ As richer data sources and more sophisticated statistical methods become availab
 Although this expansion provides analysts, coaches, and other stakeholders with more information, it also creates a fundamental problem: the existence of many metrics does not imply that each provides reliable or distinct information about performance.
 %For example, two metrics may largely measure the same underlying characteristic, while another may vary substantially because of sampling noise rather than due to meaningful differences.
 %To address this broader problem in sports analytics, a meta-analytic framework was introduced for evaluating metrics according to three statistical properties: \textit{discrimination}, \textit{stability}, and \textit{independence} \citep{franks_meta-analytics_2016}.
-Consider, volleyball for example.
+Consider volleyball, for example.
 %Volleyball provides a particularly useful setting in which to apply this framework.
 Indoor volleyball is a team sport in which two teams of six players attempt to make the ball touch the opponent's court while preventing the opponent from doing the same.
 %When a team controls the ball during a possession (called a \textit{rally}), play typically progresses through a sequence of events (called \textit{contacts}). 
 %such as reception or defense, setting, and attack, while serving and blocking provide additional opportunities to directly influence the outcome of a rally.
 Players occupy specialized roles that constrain both their responsibilities and their opportunities to perform particular actions.
-Individual volleyball performance is consequentially multidimensional and role-dependent, such that a metric that is informative for one position may have limited relevance for another.
+Consequently, individual volleyball performance is multidimensional and role-dependent, such that a metric that is informative for one position may have limited relevance for another.
 %Volleyball analysis has traditionally relied upon box-score-based statistics describing skills such as attacking, serving, reception, blocking, and defending.
 %Previous research has shown that these performance indicators are associated with competitive success.
-Previous studies have used box-score based statistics to assess the contributions of spike, serve, and block performance to team rankings \citep{marcelino_weight_2008}, as well as identify which volleyball skills and contextual factors best predict winning and losing at the elite level \citep{pena_which_2013}.
+Previous studies have used box-score-based statistics to assess the contributions of spike, serve, and block performance to team rankings \citep{marcelino_weight_2008}, as well as identify which volleyball skills and contextual factors best predict winning and losing at the elite level \citep{pena_which_2013}.
 While providing aggregate insights, these works have not demonstrated how well these statistics distinguish between players or how closely they relate to one another.
 %This previous research shows that commonly recorded volleyball statistics are useful for understanding performance, but it does not show 
-Volleyball analytics literature has recently focused on estimating individual contribution using increasingly sophisticated methods like Markov chains and Bayesian logistic regression \citep{miskin_skill_2010, powers_estimating_2025}.
-Complementary downstream improvements to subjective skill evaluation ratings \citep{bagley_bump_2017}, in-game serving \citep{burton_linear_2015} strategies, and setting tendencies \citep{raymond_attack_2024} have also been proposed.
+The volleyball analytics literature has recently focused on estimating individual contribution using increasingly sophisticated methods such as Markov chains and Bayesian logistic regression \citep{miskin_skill_2010, powers_estimating_2025}.
+Complementary work has also examined subjective skill evaluation ratings \citep{bagley_bump_2017}, in-game serving strategies \citep{burton_linear_2015}, and setting tendencies \citep{raymond_attack_2024}.
 %Serving performance has been studied through point-scoring models that relate service aces, errors, and opponent sideout outcomes .
 Player impact estimates using hierarchical models have adapted approaches common to other sports \citep{hass_exploring_2018, fellingham_evaluating_2022}, and the increasing availability of public data has expanded the prevalence of context-aware and teammate-agnostic metrics \citep{evollve_glossary_2026}. \\
 %Bayesian hierarchical models have been used to estimate position- and player-specific contributions through \texttt{points scored above average}, explicitly accounting for the difficulty of separating an individual's performance from that of their teammates \citep{fellingham_evaluating_2022}.
@@ -114,10 +114,10 @@ In the NBA, \texttt{rebounds}, \texttt{blocks}, and \texttt{assists} were highly
 The analysis also showed substantial overlap among several overall measures of player performance, with a principal component analysis of five such metrics showing that the first principal component explained approximately 73\% of the variation across these measures.
 In the NHL, \texttt{hits}, \texttt{blocks}, and \texttt{shots} were relatively discriminative and stable, while \texttt{+/-} exhibited comparatively low discrimination; the framework also highlighted overlap among related families of measures such as \texttt{Corsi} and \texttt{Fenwick}.
 Meta-analytics have subsequently been applied to soccer statistics to examine how strongly metrics differentiate players and how their values persist over time \citep{elhabr_tonys_2023}.
-More recently, \citet{matteo_understanding_2026} examined how well 33 performance indicators at the player- and team-levels distinguished performance and how consistently they performed across nine seasons of Australian Football.
+More recently, \citet{matteo_understanding_2026} examined how well 33 player- and team-level performance indicators distinguished performance and how consistently they performed across nine seasons of Australian Football.
 They found that count-based measures such as \texttt{kicks}, \texttt{handballs}, \texttt{disposals}, and \texttt{goals} generally exhibited high discrimination and stability, whereas several percentage-based metrics were less reliable.
 These properties also varied across playing positions, reinforcing the importance of context when interpreting performance measures.
-To our knowledge, however, an analogous systematic review has not been conducted for volleyball, which this work sets out to accomplish.
+To our knowledge, however, an analogous systematic evaluation has not been conducted for volleyball, which this work sets out to accomplish.
 %The present study extends this framework to individual-player volleyball metrics across multiple professional competitions.
 
 
@@ -126,9 +126,9 @@ To our knowledge, however, an analogous systematic review has not been conducted
 We use open-source box-score and play-by-play data from the \texttt{pyvolleydata} Python library \citep{awosoga_pyvolleydata_2026} and its R equivalent \texttt{rvolleydata} \citep{awosoga_rvolleydata_2026}.
 Box-score records provide aggregated player statistics such as serving, attacking, reception, setting, digging, and blocking outcomes and support conventional counting, rate, percentage, and efficiency metrics.
 Player-information records additionally provide information necessary to identify performances by players across matches and seasons.
-Play-by-play data retains the sequence and context of actions within rallies, including information such as the set and point, team and player involved, action outcome, score, and point winner.
-This support the development of more advanced metrics.
-The leagues considered in this study are Major League Volleyball (MLV), League One Volleyball Pro (LOVB Pro), and Athletes Unlimited Pro Volleyball (AU Pro), the premier volleyball leagues major in North American
+Play-by-play data retain the sequence and context of actions within rallies, including information such as the set and point, team and player involved, action outcome, score, and point winner.
+These data support the development of more advanced metrics.
+The leagues considered in this study are Major League Volleyball (MLV), League One Volleyball Pro (LOVB Pro), and Athletes Unlimited Pro Volleyball (AU Pro), three major professional women's volleyball leagues in North America.
 %which have similar but not exact metric granularity and reliability across their source data.
 %The study draws exclusively on professional women's volleyball data from MLV, LOVB Pro, and AU Pro.
 %Public data are accessed through the \texttt{pyvolleydata} Python package \citep{awosoga_pyvolleydata_2026}.
@@ -140,8 +140,8 @@ We consider regular season games from MLV (308, 2024--2026), LOVB Pro (108, 2025
 AU Pro has a unique structure compared to MLV and LOVB Pro because there are no fixed teams and lineups are instead redrafted on a weekly basis during the season.
 The analysis therefore separates player identity from contextual team assignment.
 %After excluding test and exhibition competition, the retained AU Pro samples contain 30 matches in each of 2022, 2023, and 2024, and 24 matches in 2025.
-Additionally, ``Golden Set'' observations in Au Pro are excluded from the ordinary player-performance scope rather than treated as standard sets.
-Extensive data cleaning is performed on league specific data, such as competition filtering, source corrections, team aliases, name disambiguation, and missing value treatment.
+Additionally, ``Golden Set'' observations in AU Pro are excluded from the ordinary player-performance scope rather than treated as standard sets.
+Extensive data cleaning is performed on league-specific data, such as competition filtering, source corrections, team aliases, name disambiguation, and missing value treatment.
 %Unsupported or ambiguous information is retained as missing or excluded from the relevant metric rather than replaced with inferred values.
 Because the distribution and availability of metrics vary across competitions, all subsequent analyses are conducted separately within each league.
 
@@ -268,7 +268,8 @@ The corrected stability estimator is recomputed for each draw, and percentile-ba
 
 We evaluate fourteen conventional player-performance metrics derived from commonly reported volleyball box-score statistics \citep{major_league_volleyball_statistics_2024}.
 Ten are expressed on a per-set basis: \texttt{Kills/set (K/S)}, \texttt{Attack Errors/set (E/S)}, \texttt{Assists/set (AST/S)}, \texttt{Service Aces/set (SA/S)}, \texttt{Service Errors/set (SE/S)}, \texttt{Reception Errors/set (RE/S)}, \texttt{Digs/set (D/S)}, \texttt{Block Touches/set (BT/S)}, \texttt{Blocks/set (B/S)}, and \texttt{Points/set (PTS/S)}, where points are the sum of kills, service aces, and blocks.
-We additionally consider \texttt{Kill Percentage (K\%)}, \texttt{Hitting Efficiency}, \texttt{Passing Efficiency}, and \texttt{Serving Efficiency}, which normalize performance by the corresponding number of attacking, reception, or serving opportunities. In addition to the conventional statistics, we evaluate three metrics from the volleyball literature, implemented as closely as possible based on available resources. \\
+We additionally consider \texttt{Kill Percentage (K\%)}, \texttt{Hitting Efficiency (Eff)}, \texttt{Passing Efficiency (Pass Eff)}, and \texttt{Serving Efficiency (Srv Eff)}, which normalize performance by the corresponding number of attacking, reception, or serving opportunities.
+In addition to the conventional statistics, we evaluate three metrics from the volleyball literature, implemented as closely as possible based on available resources. \\
 %metrics: three metrics previously proposed in the volleyball analytics literature and thirteen metrics defined by the public Evollve statistics glossary.
 %The previously proposed metrics are implemented as closely as possible to their defining sources, while the Evollve glossary is treated as the formula authority for the remaining metrics.
 %All sixteen metrics are evaluated for MLV and LOVB Pro, while AU Pro supports only the three Evollve metrics that can be calculated directly from its available box-score data. \\
@@ -311,7 +312,7 @@ We select a penalty term using 10-fold cross-validation. \\
 
 Finally, we evaluate thirteen advanced metrics defined in the public Evollve statistics glossary \citep{evollve_glossary_2026}.
 %Fully specified formulas are implemented directly, while phase, action-ancestry, and on-court exposure quantities are reconstructed conservatively from ordered play-by-play and lineup information.
-\texttt{Serve-Receive Hitting Percentage} measures attacking performance on attacks occurring during the serve-receive phase and is calculated as
+\texttt{Serve-Receive Hitting Percentage (SR Hit \%)} measures attacking performance on attacks occurring during the serve-receive phase and is calculated as
 
 \[
 \frac{
@@ -321,7 +322,7 @@ Finally, we evaluate thirteen advanced metrics defined in the public Evollve sta
 }.
 \]
 
-\texttt{Transition Hitting Percentage} applies analogously to attacks occurring after a dig:
+\texttt{Transition Hitting Percentage (Trans Hit \%)} applies analogously to attacks occurring after a dig:
 
 \[
 \frac{
@@ -331,7 +332,7 @@ Finally, we evaluate thirteen advanced metrics defined in the public Evollve sta
 }.
 \]
 
-\texttt{Serve-Receive Hit Average} is a variant of \texttt{Serve-Receive Hitting Percentage} that assigns partial credit to non-terminal attacks during serve receive:
+\texttt{Serve-Receive Hit Average (SR Hit Avg)} is a variant of \texttt{Serve-Receive Hitting Percentage (SR Hit \%)} that assigns partial credit to non-terminal attacks during serve receive:
 
 \[
 \frac{
@@ -345,7 +346,7 @@ Finally, we evaluate thirteen advanced metrics defined in the public Evollve sta
 
 The coefficient of $0.433$ is retained from the reference implementation.
 %We use the same reconstructed serve-receive phases and retain the published weight of .
-\texttt{Transition Hit Average} applies the corresponding weighted construction to transition attacks:
+\texttt{Transition Hit Average (Trans Hit Avg)} applies the corresponding weighted construction to transition attacks:
 
 \[
 \frac{
@@ -358,9 +359,9 @@ The coefficient of $0.433$ is retained from the reference implementation.
 \]
 
 
-\texttt{Dig Attack Conversion Percentage} measures how often a successful dig is followed by a subsequent attack by the same team.
+\texttt{Dig Attack Conversion Percentage (Dig$\rightarrow$Att \%)} measures how often a successful dig is followed by a subsequent attack by the same team.
 %It is calculated as the number of modeled digs followed by an attack during the same possession divided by the total number of modeled digs, with each successful dig matched only to the first attack that occurs later in that possession.
-\texttt{Dig Kill Percentage} unsurp measures how often a successful dig is followed by a subsequent attack that results in a kill.
+\texttt{Dig Kill Percentage (Dig$\rightarrow$Kill \%)} measures how often a successful dig is followed by a subsequent attack that results in a kill.
 %Its numerator consists of modeled digs whose subsequent same-possession attack is a kill, using the same modeled-dig denominator as \texttt{Dig Attack Conversion Percentage}, and the succeeding attack must have an unambiguous outcome.
 \texttt{Dig Rate} measures the proportion of opponent attacking opportunities for which an on-court player records a dig:
 
@@ -374,7 +375,7 @@ The coefficient of $0.433$ is retained from the reference implementation.
 
 with on-court exposure calculated only where complete lineup information is available.
 
-\texttt{Reception Rate} measures the proportion of opponent serve opportunities received by a player while that player is on court:
+\texttt{Reception Rate (Rec Rate)} measures the proportion of opponent serve opportunities received by a player while that player is on court:
 
 \[
 \frac{
@@ -385,7 +386,7 @@ with on-court exposure calculated only where complete lineup information is avai
 \]
 
 %Numerators and exposure denominators are restricted to the same reconstructed on-court scope.
-\texttt{Percentage of Points Won While On Court} measures the proportion of points won by a player's team while that player is on court:
+\texttt{Percentage of Points Won While On Court (\% Won On)} measures the proportion of points won by a player's team while that player is on court:
 
 \[
 \frac{
@@ -396,7 +397,7 @@ with on-court exposure calculated only where complete lineup information is avai
 \]
 
 %with only points containing complete lineup information entering the calculation.
-\texttt{Kill Rate per Rally Point} expresses a player's kills relative to the number of rally points for which that player is on court:
+\texttt{Kill Rate per Rally Point (K/Rally)} expresses a player's kills relative to the number of rally points for which that player is on court:
 
 \[
 \frac{
@@ -408,10 +409,9 @@ with on-court exposure calculated only where complete lineup information is avai
 
 where rally points exclude points terminating directly on a service ace or service error.
 
-\texttt{Blocked Rate} measures the proportion of a player's attack attempts that result in a blocked attack error.
-
+\texttt{Blocked Rate (Blocked \%)} measures the proportion of a player's attack attempts that result in a blocked attack error.
 %Both quantities are obtained directly from box-score data.
-\texttt{Serve Average} assigns full credit to aces, zero credit to service errors, and partial credit to other serves:
+\texttt{Serve Average (Srv Avg)} assigns full credit to aces, zero credit to service errors, and partial credit to other serves:
 
 \[
 \frac{
@@ -424,7 +424,7 @@ where rally points exclude points terminating directly on a service ace or servi
 \]
 
 using the published weight of $0.435$.
-Finally, \texttt{Attack Error Rate Excluding Blocks} measures attack errors that are not attributed to the attacker being blocked:
+Finally, \texttt{Attack Error Rate Excluding Blocks (Att Err \%)} measures attack errors that are not attributed to the attacker being blocked:
 
 \[
 \frac{
@@ -434,7 +434,7 @@ Finally, \texttt{Attack Error Rate Excluding Blocks} measures attack errors that
 }.
 \]
 
-Due to the transitive nature of teams in AU Pro, only of these metrics were computed for that league.
+Because only three of the thirteen Evollve metrics can be computed directly from the available AU Pro box-score data, only \texttt{Blocked Rate (Blocked \%)}, \texttt{Serve Average (Srv Avg)}, and \texttt{Attack Error Rate Excluding Blocks (Att Err \%)} are evaluated for that league.
 
 \section{Results}
 
@@ -452,16 +452,6 @@ AU Pro estimates remained within the unit interval, with \texttt{Assists/set} (0
 Several corrected stability estimates for MLV and LOVB Pro were below zero or above one because the finite-sample correction can produce values outside the theoretical range, and these values were kept unchanged rather than capped at zero or one.
 \texttt{Dig Kill Percentage} did not produce a corrected stability estimate for LOVB Pro because the adjusted between-player variation was zero or negative.
 As these leagues continue to operate in more seasons, we expect stability values to more readily fall within the $[0,1]$ interval.
-
-\subsection{Independence}
-
-Figures~\ref{fig:independence-mlv}--\ref{fig:independence-au} present the greedy conditional-independence curves for the three leagues.
-Under full conditioning, \texttt{Passing Efficiency} was among the most independent metrics in all three leagues, with values of 0.787 in MLV, 0.858 in LOVB Pro, and 0.795 in AU Pro.
-In MLV and LOVB Pro, \texttt{AEV} and the two dig-conversion measures also provided relatively unique information: \texttt{AEV} reached 0.739 and 0.890, respectively, while \texttt{Dig Kill Percentage} reached 0.778 and 0.866.
-Several commonly reported metrics were substantially more redundant, with \texttt{Points/set} and \texttt{Kills/set} among the lowest full-conditioning independence measures in both MLV and LOVB Pro.
-The serving family, including \texttt{Serve Average} and \texttt{Serving Efficiency}, also showed low independence across leagues.
-In AU Pro, \texttt{Service Errors/set} had the lowest independence (0.105), followed by \texttt{Service Aces/set} (0.166), \texttt{Serving Efficiency} (0.171), and \texttt{Serve Average} (0.177).
-%Across all greedy curves, independence increased as metrics were removed from the conditioning set and reached one when no conditioning metrics remained, as expected from the way the measure is defined.
 
 \begin{figure}[!htbp]
     \centering
@@ -481,6 +471,16 @@ In AU Pro, \texttt{Service Errors/set} had the lowest independence (0.105), foll
     \caption{Latest-season discrimination and corrected stability for AU Pro. Estimates are shown as calculated, including values outside the theoretical range.}
     \label{fig:reliability-au}
 \end{figure}
+
+\subsection{Independence}
+
+Figures~\ref{fig:independence-mlv}--\ref{fig:independence-au} present the greedy conditional-independence curves for the three leagues.
+Under full conditioning, \texttt{Passing Efficiency} was among the most independent metrics in all three leagues, with values of 0.787 in MLV, 0.858 in LOVB Pro, and 0.795 in AU Pro.
+In MLV and LOVB Pro, \texttt{AEV} and the two dig-conversion measures also provided relatively unique information: \texttt{AEV} reached 0.739 and 0.890, respectively, while \texttt{Dig Kill Percentage} reached 0.778 and 0.866.
+Several commonly reported metrics were substantially more redundant, with \texttt{Points/set} and \texttt{Kills/set} among the lowest full-conditioning independence measures in both MLV and LOVB Pro.
+The serving family, including \texttt{Serve Average} and \texttt{Serving Efficiency}, also showed low independence across leagues.
+In AU Pro, \texttt{Service Errors/set} had the lowest independence (0.105), followed by \texttt{Service Aces/set} (0.166), \texttt{Serving Efficiency} (0.171), and \texttt{Serve Average} (0.177).
+%Across all greedy curves, independence increased as metrics were removed from the conditioning set and reached one when no conditioning metrics remained, as expected from the way the measure is defined.
 
 \begin{figure}[!htbp]
     \centering
