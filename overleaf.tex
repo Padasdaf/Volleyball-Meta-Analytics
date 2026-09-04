@@ -440,7 +440,7 @@ Because only three of the thirteen Evollve metrics can be computed directly from
 
 \subsection{Discrimination and Stability}
 
-Figures~\ref{fig:reliability-mlv}--\ref{fig:reliability-au} compare latest-season discrimination with corrected stability across the three leagues.
+The left panels of Figures~\ref{fig:meta-mlv}--\ref{fig:meta-au} compare latest-season discrimination with corrected stability across the three leagues.
 Several conventional per-set measures were consistently highly discriminative across leagues: \texttt{Assists/set} had the largest estimate in MLV (0.991), LOVB Pro (0.989), and AU Pro (0.993), while \texttt{Kills/set} and \texttt{Points/set} also exceeded 0.96 in each league.
 In MLV and LOVB Pro, \texttt{Reception Rate} was similarly discriminative (0.951 in both), whereas several contextual advanced metrics showed substantially lower values, including \texttt{Dig Kill Percentage} in MLV (0.147) and LOVB Pro (0.049) and \texttt{Dig Attack Conversion Percentage} in LOVB Pro (0.112).
 AU Pro exhibited a narrower range, with \texttt{Passing Efficiency} producing its lowest discrimination estimate (0.481). \\
@@ -453,28 +453,9 @@ Several corrected stability estimates for MLV and LOVB Pro were below zero or ab
 \texttt{Dig Kill Percentage} did not produce a corrected stability estimate for LOVB Pro because the adjusted between-player variation was zero or negative.
 As these leagues continue to operate in more seasons, we expect stability values to more readily fall within the $[0,1]$ interval.
 
-\begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=0.60\textwidth]{figures/Figure_1_Reliability_MLV.pdf}
-    \caption{Latest-season discrimination and corrected stability for MLV. Estimates are shown as calculated, including values outside the theoretical range.}
-    \label{fig:reliability-mlv}
-\end{figure}
-\begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=0.60\textwidth]{figures/Figure_1_Reliability_LOVB.pdf}
-    \caption{Latest-season discrimination and corrected stability for LOVB Pro. Estimates are shown as calculated, including values outside the theoretical range.}
-    \label{fig:reliability-lovb}
-\end{figure}
-\begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=0.60\textwidth]{figures/Figure_1_Reliability_AU.pdf}
-    \caption{Latest-season discrimination and corrected stability for AU Pro. Estimates are shown as calculated, including values outside the theoretical range.}
-    \label{fig:reliability-au}
-\end{figure}
-
 \subsection{Independence}
 
-Figures~\ref{fig:independence-mlv}--\ref{fig:independence-au} present the greedy conditional-independence curves for the three leagues.
+The right panels of Figures~\ref{fig:meta-mlv}--\ref{fig:meta-au} present the greedy conditional-independence curves for the three leagues.
 Under full conditioning, \texttt{Passing Efficiency} was among the most independent metrics in all three leagues, with values of 0.787 in MLV, 0.858 in LOVB Pro, and 0.795 in AU Pro.
 In MLV and LOVB Pro, \texttt{AEV} and the two dig-conversion measures also provided relatively unique information: \texttt{AEV} reached 0.739 and 0.890, respectively, while \texttt{Dig Kill Percentage} reached 0.778 and 0.866.
 Several commonly reported metrics were substantially more redundant, with \texttt{Points/set} and \texttt{Kills/set} among the lowest full-conditioning independence measures in both MLV and LOVB Pro.
@@ -484,21 +465,65 @@ In AU Pro, \texttt{Service Errors/set} had the lowest independence (0.105), foll
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.60\textwidth]{figures/Figure_2_Independence_Curves_MLV.pdf}
-    \caption{Greedy conditional-independence curves for MLV. The highlighted curves correspond to the five metrics with the largest full-conditioning independence values.}
-    \label{fig:independence-mlv}
+
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Figure_1_Reliability_MLV.pdf}
+
+        (a) Discrimination and stability
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Figure_2_Independence_Curves_MLV.pdf}
+
+        (b) Independence
+    \end{minipage}
+
+    \caption{Meta-analytic results for MLV. The left panel shows latest-season discrimination and corrected stability, with estimates shown as calculated, including values outside the theoretical range. The right panel shows the greedy conditional-independence curves, with the five metrics having the largest full-conditioning independence values highlighted.}
+    \label{fig:meta-mlv}
 \end{figure}
+
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.60\textwidth]{figures/Figure_2_Independence_Curves_LOVB.pdf}
-    \caption{Greedy conditional-independence curves for LOVB Pro. The highlighted curves correspond to the five metrics with the largest full-conditioning independence values.}
-    \label{fig:independence-lovb}
+
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Figure_1_Reliability_LOVB.pdf}
+
+        (a) Discrimination and stability
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Figure_2_Independence_Curves_LOVB.pdf}
+
+        (b) Independence
+    \end{minipage}
+
+    \caption{Meta-analytic results for LOVB Pro. The left panel shows latest-season discrimination and corrected stability, with estimates shown as calculated, including values outside the theoretical range. The right panel shows the greedy conditional-independence curves, with the five metrics having the largest full-conditioning independence values highlighted.}
+    \label{fig:meta-lovb}
 \end{figure}
+
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.60\textwidth]{figures/Figure_2_Independence_Curves_AU.pdf}
-    \caption{Greedy conditional-independence curves for AU Pro. The highlighted curves correspond to the five metrics with the largest full-conditioning independence values.}
-    \label{fig:independence-au}
+
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Figure_1_Reliability_AU.pdf}
+
+        (a) Discrimination and stability
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Figure_2_Independence_Curves_AU.pdf}
+
+        (b) Independence
+    \end{minipage}
+
+    \caption{Meta-analytic results for AU Pro. The left panel shows latest-season discrimination and corrected stability. The right panel shows the greedy conditional-independence curves, with the five metrics having the largest full-conditioning independence values highlighted.}
+    \label{fig:meta-au}
 \end{figure}
 
 
@@ -510,7 +535,7 @@ LOVB Pro required 13, 19, and 23 components, while AU Pro required 7, 10, and 12
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.60\textwidth]{figures/Figure_3_PCA_Cumulative_Variance.pdf}
+    \includegraphics[width=0.65\textwidth]{figures/Figure_3_PCA_Cumulative_Variance.pdf}
     \caption{Cumulative variance explained by principal components of the posterior-mean latent correlation matrix for MLV, LOVB Pro, and AU Pro.}
     \label{fig:pca}
 \end{figure}
@@ -522,19 +547,19 @@ These clusters reflect similarity across rows of the absolute latent correlation
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.60\textwidth]{figures/Figure_4_Dendrogram_MLV.pdf}
+    \includegraphics[width=0.70\textwidth]{figures/Figure_4_Dendrogram_MLV.pdf}
     \caption{Complete-linkage hierarchical clustering of metric correlation profiles for MLV. Distances are Euclidean distances between rows of the absolute posterior-mean latent correlation matrix.}
     \label{fig:clustering-mlv}
 \end{figure}
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.60\textwidth]{figures/Figure_4_Dendrogram_LOVB.pdf}
+    \includegraphics[width=0.70\textwidth]{figures/Figure_4_Dendrogram_LOVB.pdf}
     \caption{Complete-linkage hierarchical clustering of metric correlation profiles for LOVB Pro. Distances are Euclidean distances between rows of the absolute posterior-mean latent correlation matrix.}
     \label{fig:clustering-lovb}
 \end{figure}
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.60\textwidth]{figures/Figure_4_Dendrogram_AU.pdf}
+    \includegraphics[width=0.70\textwidth]{figures/Figure_4_Dendrogram_AU.pdf}
     \caption{Complete-linkage hierarchical clustering of metric correlation profiles for AU Pro. Distances are Euclidean distances between rows of the absolute posterior-mean latent correlation matrix.}
     \label{fig:clustering-au}
 \end{figure}
@@ -545,7 +570,7 @@ These clusters reflect similarity across rows of the absolute latent correlation
 The results demonstrate that discrimination, stability, and independence capture distinct properties of volleyball metrics and should therefore be considered jointly.
 Several conventional per-set statistics, particularly \texttt{Assists/set}, \texttt{Kills/set}, and \texttt{Points/set}, were highly discriminative across leagues but were also among the least independent metrics.
 Conversely, advanced metrics such as \texttt{AEV} and the dig-conversion measures contributed comparatively distinct information despite lower discrimination or stability in some settings.
-A metric can therefore distinguish players clearly without adding much new information, or capture a comparatively distinct aspect of performance while remaining sensitive to sampling variability or season-to-season change.
+A metric can therefore distinguish players clearly without adding much new information, or provide comparatively nonredundant information while remaining sensitive to sampling variability or season-to-season change.
 The cross-league results further demonstrate that these statistical properties are not necessarily intrinsic to the metric itself: although some discrimination patterns were consistent, stability differed considerably across MLV, LOVB Pro, and AU Pro.
 For example, \texttt{PSF} had a large corrected stability estimate in MLV but a negative estimate in LOVB Pro.
 Such differences may reflect variation in player populations, season length, player movement, competitive structure, opportunity distributions, or available data, and a metric that behaves reliably in one competition should not automatically be assumed to have the same properties in another. \\
@@ -556,37 +581,42 @@ At the same time, intuitive clusters such as \texttt{Kills/set} with \texttt{Poi
 These properties have direct applications when deciding which statistics to communicate to practitioners.
 In a scouting report, discrimination and stability can help identify metrics that provide comparatively reliable separation between players, while independence can help avoid presenting several statistics that largely repeat the same underlying information.
 A report could therefore prioritize a smaller collection of complementary metrics rather than simply including every available statistic.
-Similarly, coaches could use reliable skill-specific measures to identify areas of a player's performance that warrant additional attention and to monitor whether those areas change over time.
+Similarly, coaches could use reliable skill-specific measures to monitor areas of player performance that have already been identified as priorities.
 Meta-analytic evaluation does not tell coaches which training plan to use, but it can help determine whether the metric used to guide or monitor that plan is reliable and informative enough to interpret meaningfully.
-
-Several limitations affect these conclusions.
-Only a small number of seasons are available for each professional competition, leaving many repeated players with two or three qualifying seasons; this motivates the $1/(S_p-1)$ correction but does not eliminate uncertainty from short longitudinal histories.
-Advanced measures requiring detailed sequence or lineup information also have more restricted coverage, and \texttt{AEV} in particular is available for relatively few player-seasons because of its source-defined setter and attack-volume requirements.
-Ambiguous sequence or lineup information is treated as missing rather than estimated, which preserves the accuracy of the source data but reduces the amount of usable information.
-Metric availability also differs across leagues, especially for AU Pro, so comparisons across competitions do not always involve identical metric sets.
-Furthermore, players occupy specialized roles with substantially different opportunities to perform particular actions, meaning that some observed statistical properties may partly reflect player role and opportunity structure.
-Future analyses with longer league histories and larger repeated-player populations would allow these quantities to be estimated with greater precision.
-
-More broadly, discrimination, stability, and independence should not be interpreted as direct measures of a statistic's predictive value, causal contribution to winning, or usefulness in a particular coaching decision.
-A highly discriminative and stable metric may reflect persistent role or opportunity patterns, while a less stable but highly independent measure may capture contextual information absent from conventional statistics.
-Meta-analytics instead provide a complementary framework for understanding whether observed player differences exceed sampling noise, persist over time, and duplicate information already contained in other measures.
-These properties can inform the selection of statistics for scouting, player development, and communication, but should be considered alongside volleyball expertise and analyses tailored to the specific sporting question.
-Future volleyball metrics can therefore be evaluated not only according to their interpretation or relationship with outcomes, but also according to whether they contribute reliable and genuinely complementary statistical information.
-In this way, the framework can help analysts distinguish between additional metrics that broaden the description of player performance and those that primarily reproduce information already available elsewhere.
 
 
 \section{Conclusion}
 
-% TODO: Summarize the primary findings and contributions after the
-% Discussion is finalized.
+This study applies a meta-analytic framework to evaluate the statistical properties of conventional and advanced player-performance metrics across MLV, LOVB Pro, and AU Pro.
+The results demonstrate that discrimination, stability, and independence provide complementary perspectives on metric quality, with no single property sufficient to characterize a metric on its own.
+Several conventional per-set statistics clearly distinguished between players but also contained substantial overlap with other measures, while some advanced metrics provided comparatively nonredundant information despite weaker discrimination or stability.
+The PCA and clustering analyses similarly showed that the analyzed metrics contain meaningful redundancy without collapsing into only a small number of common dimensions.
+Differences across leagues further demonstrate that the statistical behaviour of a metric depends in part on the competition, available data, and player population in which it is evaluated.
+Together, these findings show that the growing number of volleyball metrics should not be interpreted solely according to their definitions or apparent complexity, but also according to the statistical information they provide.
+For practitioners, meta-analytic evaluation can help support the selection of smaller and more complementary sets of statistics for scouting, player development, and performance communication.
+More broadly, this work provides a systematic foundation for evaluating existing and future volleyball metrics according to whether observed player differences exceed sampling noise, persist across seasons, and provide information beyond that already captured by other measures.
 
 
-\subsection{Future Work}
+\subsection{Limitations and Future Work}
 
-% TODO: Discuss longer longitudinal samples, richer professional data,
-% additional source-faithful metrics, position-specific meta-analysis,
-% and evaluation against predictive or decision-specific objectives.
+Several limitations should be considered when interpreting these results.
+Only a small number of seasons are available for each professional competition, leaving many repeated players with two or three qualifying seasons and limiting the precision with which stability can be estimated.
+Advanced measures requiring detailed sequence or lineup information also have more restricted coverage, and \texttt{AEV} in particular is available for relatively few player-seasons because of its source-defined setter and attack-volume requirements.
+Ambiguous sequence or lineup information is treated as missing rather than inferred, prioritizing source fidelity at the cost of coverage, while metric availability also differs across leagues, especially for AU Pro.
+Player specialization and differences in opportunity may additionally contribute to some of the observed statistical properties because players in different roles are exposed to substantially different actions and responsibilities. \\
 
+Future work should first revisit these analyses as longer professional league histories and richer play-by-play and lineup data become available.
+Larger repeated-player populations would allow stability to be estimated more precisely, while improved data coverage would support more consistent evaluation of advanced metrics across leagues.
+A second direction is to expand the set of source-faithful metrics included in the analysis as additional measures become available or can be reliably reconstructed from public data.
+Evaluating a broader set of metrics would provide a more complete picture of which aspects of volleyball performance are already well represented and where meaningful gaps remain.
+The identified gaps can also inform the development of new volleyball metrics.
+In particular, new measures could be designed to provide information that is less redundant with existing statistics while also aiming for stronger discrimination and stability, and then evaluated using the same meta-analytic framework.
+Position-specific meta-analysis represents another important extension because volleyball roles differ substantially in both responsibilities and statistical opportunities.
+Evaluating setters, hitters, middle blockers, liberos, and other positional groups separately could help distinguish properties of the metrics themselves from patterns driven primarily by role and opportunity.
+The framework could also be extended beyond professional volleyball to collegiate competitions such as NCAA and U Sports volleyball.
+These competitions would provide larger and structurally different player populations in which to assess whether the patterns observed across MLV, LOVB Pro, and AU Pro generalize to other levels of play.
+Finally, meta-analytic properties could be considered alongside predictive or decision-specific objectives.
+Discrimination, stability, and independence do not directly measure predictive value or causal contribution to winning, so future work could separately evaluate how metrics with different meta-analytic profiles relate to outcomes such as point, set, or match success and to specific scouting or coaching decisions.
 
 % \subsection*{Acknowledgment}
 
