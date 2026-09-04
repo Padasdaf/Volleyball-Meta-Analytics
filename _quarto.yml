@@ -1,6 +1,12 @@
 project:
   type: manuscript
 
+manuscript:
+  article: index.qmd
+  notebooks:
+    - notebook: notebooks/visualization.qmd
+      title: Visualization
+
 execute:
   freeze: auto
 
@@ -10,6 +16,4 @@ format:
     comments:
       hypothesis: true
   jasa-pdf: default
-
-
-
+  
