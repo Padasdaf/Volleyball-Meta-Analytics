@@ -536,7 +536,7 @@ def meta_figure(league):
     fig.subplots_adjust(
         left=.055,
         right=.985,
-        bottom=.14,
+        bottom=.18,
         top=.935,
         wspace=.20,
     )
@@ -564,6 +564,24 @@ def meta_figure(league):
         axes[1],
         league,
         legend_fontsize=11.5,
+    )
+
+    fig.text(
+        .27,
+        .025,
+        "(a) Discrimination and stability",
+        ha="center",
+        va="bottom",
+        fontsize=12.5,
+    )
+
+    fig.text(
+        .75,
+        .025,
+        "(b) Independence",
+        ha="center",
+        va="bottom",
+        fontsize=12.5,
     )
 
     return fig

@@ -711,7 +711,7 @@ def meta_figure(league):
     fig.subplots_adjust(
         left=.055,
         right=.985,
-        bottom=.14,
+        bottom=.18,
         top=.935,
         wspace=.20,
     )
@@ -739,6 +739,24 @@ def meta_figure(league):
         axes[1],
         league,
         legend_fontsize=11.5,
+    )
+
+    fig.text(
+        .27,
+        .025,
+        "(a) Discrimination and stability",
+        ha="center",
+        va="bottom",
+        fontsize=12.5,
+    )
+
+    fig.text(
+        .75,
+        .025,
+        "(b) Independence",
+        ha="center",
+        va="bottom",
+        fontsize=12.5,
     )
 
     return fig
@@ -1047,7 +1065,7 @@ plt.close(fig)</code></pre>
 <div id="fig-meta-mlv" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-meta-mlv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
-<a href="visualization_files/figure-html/fig-meta-mlv-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Meta-analytic results for MLV. The left panel shows latest-season discrimination and corrected stability, with estimates shown as calculated, including values outside the theoretical range. The right panel shows the greedy conditional-independence curves, with the five metrics having the largest full-conditioning independence values highlighted."><img src="visualization_files/figure-html/fig-meta-mlv-output-2.png" class="quarto-figure quarto-figure-center figure-img" width="2213" height="1111"></a>
+<a href="visualization_files/figure-html/fig-meta-mlv-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Meta-analytic results for MLV. The left panel shows latest-season discrimination and corrected stability, with estimates shown as calculated, including values outside the theoretical range. The right panel shows the greedy conditional-independence curves, with the five metrics having the largest full-conditioning independence values highlighted."><img src="visualization_files/figure-html/fig-meta-mlv-output-2.png" class="quarto-figure quarto-figure-center figure-img" width="2167" height="1107"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-meta-mlv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Meta-analytic results for MLV. The left panel shows latest-season discrimination and corrected stability, with estimates shown as calculated, including values outside the theoretical range. The right panel shows the greedy conditional-independence curves, with the five metrics having the largest full-conditioning independence values highlighted.
@@ -1067,7 +1085,7 @@ plt.close(fig)</code></pre>
 <div id="fig-meta-lovb" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-meta-lovb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
-<a href="visualization_files/figure-html/fig-meta-lovb-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Meta-analytic results for LOVB Pro. The left panel shows latest-season discrimination and corrected stability, with estimates shown as calculated, including values outside the theoretical range. The right panel shows the greedy conditional-independence curves, with the five metrics having the largest full-conditioning independence values highlighted."><img src="visualization_files/figure-html/fig-meta-lovb-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="2233" height="1111"></a>
+<a href="visualization_files/figure-html/fig-meta-lovb-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Meta-analytic results for LOVB Pro. The left panel shows latest-season discrimination and corrected stability, with estimates shown as calculated, including values outside the theoretical range. The right panel shows the greedy conditional-independence curves, with the five metrics having the largest full-conditioning independence values highlighted."><img src="visualization_files/figure-html/fig-meta-lovb-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="2188" height="1107"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-meta-lovb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Meta-analytic results for LOVB Pro. The left panel shows latest-season discrimination and corrected stability, with estimates shown as calculated, including values outside the theoretical range. The right panel shows the greedy conditional-independence curves, with the five metrics having the largest full-conditioning independence values highlighted.
@@ -1087,7 +1105,7 @@ plt.close(fig)</code></pre>
 <div id="fig-meta-au" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-meta-au-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
-<a href="visualization_files/figure-html/fig-meta-au-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Meta-analytic results for AU Pro. The left panel shows latest-season discrimination and corrected stability. The right panel shows the greedy conditional-independence curves, with the five metrics having the largest full-conditioning independence values highlighted."><img src="visualization_files/figure-html/fig-meta-au-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="2194" height="1111"></a>
+<a href="visualization_files/figure-html/fig-meta-au-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Meta-analytic results for AU Pro. The left panel shows latest-season discrimination and corrected stability. The right panel shows the greedy conditional-independence curves, with the five metrics having the largest full-conditioning independence values highlighted."><img src="visualization_files/figure-html/fig-meta-au-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="2148" height="1107"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-meta-au-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Meta-analytic results for AU Pro. The left panel shows latest-season discrimination and corrected stability. The right panel shows the greedy conditional-independence curves, with the five metrics having the largest full-conditioning independence values highlighted.
