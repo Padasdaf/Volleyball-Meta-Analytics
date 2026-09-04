@@ -519,6 +519,56 @@ def independence_figure(league):
     return fig
 
 
+def meta_figure(league):
+    publication_style()
+
+    frame = results.loc[
+        results["league"].eq(league)
+    ].copy()
+
+    fig, axes = plt.subplots(
+        1,
+        2,
+        figsize=(16.4, 8.2),
+        constrained_layout=False,
+    )
+
+    fig.subplots_adjust(
+        left=.055,
+        right=.985,
+        bottom=.14,
+        top=.935,
+        wspace=.20,
+    )
+
+    plot_reliability_panel(
+        axes[0],
+        frame,
+        league,
+        label_fontsize=11.5,
+    )
+
+    handles, labels = axes[0].get_legend_handles_labels()
+
+    axes[0].legend(
+        handles,
+        labels,
+        frameon=False,
+        ncol=2,
+        loc="upper center",
+        bbox_to_anchor=(.5, -.10),
+        borderaxespad=0,
+    )
+
+    plot_independence_panel(
+        axes[1],
+        league,
+        legend_fontsize=11.5,
+    )
+
+    return fig
+
+
 def pca_component_thresholds(frame):
     cumulative = frame[
         "cumulative_variance"
@@ -810,64 +860,36 @@ def dendrogram_image(league):
 ```
 
 ```{python}
-#| id: fig-meta-mlv
 #| label: fig-meta-mlv
 #| fig-cap: "Meta-analytic results for MLV. The left panel shows latest-season discrimination and corrected stability, with estimates shown as calculated, including values outside the theoretical range. The right panel shows the greedy conditional-independence curves, with the five metrics having the largest full-conditioning independence values highlighted."
-#| fig-subcap:
-#|   - "Discrimination and stability"
-#|   - "Independence"
-#| layout-ncol: 2
 #| fig-align: center
 
-fig = reliability_figure("mlv")
-plt.show()
-plt.close(fig)
-
-fig = independence_figure("mlv")
+fig = meta_figure("mlv")
 plt.show()
 plt.close(fig)
 ```
 
 ```{python}
-#| id: fig-meta-lovb
 #| label: fig-meta-lovb
 #| fig-cap: "Meta-analytic results for LOVB Pro. The left panel shows latest-season discrimination and corrected stability, with estimates shown as calculated, including values outside the theoretical range. The right panel shows the greedy conditional-independence curves, with the five metrics having the largest full-conditioning independence values highlighted."
-#| fig-subcap:
-#|   - "Discrimination and stability"
-#|   - "Independence"
-#| layout-ncol: 2
 #| fig-align: center
 
-fig = reliability_figure("lovb")
-plt.show()
-plt.close(fig)
-
-fig = independence_figure("lovb")
+fig = meta_figure("lovb")
 plt.show()
 plt.close(fig)
 ```
 
 ```{python}
-#| id: fig-meta-au
 #| label: fig-meta-au
 #| fig-cap: "Meta-analytic results for AU Pro. The left panel shows latest-season discrimination and corrected stability. The right panel shows the greedy conditional-independence curves, with the five metrics having the largest full-conditioning independence values highlighted."
-#| fig-subcap:
-#|   - "Discrimination and stability"
-#|   - "Independence"
-#| layout-ncol: 2
 #| fig-align: center
 
-fig = reliability_figure("au")
-plt.show()
-plt.close(fig)
-
-fig = independence_figure("au")
+fig = meta_figure("au")
 plt.show()
 plt.close(fig)
 ```
 
 ```{python}
-#| id: fig-pca
 #| label: fig-pca
 #| fig-cap: "Cumulative variance explained by principal components of the posterior-mean latent correlation matrix for MLV, LOVB Pro, and AU Pro."
 #| fig-align: center
@@ -878,7 +900,6 @@ plt.close(fig)
 ```
 
 ```{python}
-#| id: fig-clustering-mlv
 #| label: fig-clustering-mlv
 #| fig-cap: "Complete-linkage hierarchical clustering of metric correlation profiles for MLV. Distances are Euclidean distances between rows of the absolute posterior-mean latent correlation matrix."
 #| fig-align: center
@@ -887,7 +908,6 @@ display(dendrogram_image("mlv"))
 ```
 
 ```{python}
-#| id: fig-clustering-lovb
 #| label: fig-clustering-lovb
 #| fig-cap: "Complete-linkage hierarchical clustering of metric correlation profiles for LOVB Pro. Distances are Euclidean distances between rows of the absolute posterior-mean latent correlation matrix."
 #| fig-align: center
@@ -896,7 +916,6 @@ display(dendrogram_image("lovb"))
 ```
 
 ```{python}
-#| id: fig-clustering-au
 #| label: fig-clustering-au
 #| fig-cap: "Complete-linkage hierarchical clustering of metric correlation profiles for AU Pro. Distances are Euclidean distances between rows of the absolute posterior-mean latent correlation matrix."
 #| fig-align: center
